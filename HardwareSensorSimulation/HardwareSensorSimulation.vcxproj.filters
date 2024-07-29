@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Factory">
+      <UniqueIdentifier>{3b82e62e-84da-4963-802c-1e2d043d8fdc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sensors">
+      <UniqueIdentifier>{2a3e98cf-d0fb-4c27-a3c2-f51a085bb7e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sensors\Door">
+      <UniqueIdentifier>{160e7809-9c68-4a5c-b57f-d85ea2732cd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sensors\Siren">
+      <UniqueIdentifier>{567c9f92-6678-4e43-ae7c-a90195f43c3a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sensors\Smoke">
+      <UniqueIdentifier>{4e01479f-2116-43e1-9bf9-400fca0d7822}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sensors\WindowBroken">
+      <UniqueIdentifier>{4498e715-7e41-4585-8ba0-c15927ab8c2b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="HardwareSensorsFactory.cpp">
+      <Filter>Factory</Filter>
+    </ClCompile>
+    <ClCompile Include="HDoor.cpp">
+      <Filter>Sensors\Door</Filter>
+    </ClCompile>
+    <ClCompile Include="HWindowBroken.cpp">
+      <Filter>Sensors\WindowBroken</Filter>
+    </ClCompile>
+    <ClCompile Include="HSmoke.cpp">
+      <Filter>Sensors\Smoke</Filter>
+    </ClCompile>
+    <ClCompile Include="HSiren.cpp">
+      <Filter>Sensors\Siren</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="HardwareSensorsFactory.h">
+      <Filter>Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="HDoor.h">
+      <Filter>Sensors\Door</Filter>
+    </ClInclude>
+    <ClInclude Include="HWindowBroken.h">
+      <Filter>Sensors\WindowBroken</Filter>
+    </ClInclude>
+    <ClInclude Include="HSmoke.h">
+      <Filter>Sensors\Smoke</Filter>
+    </ClInclude>
+    <ClInclude Include="HSiren.h">
+      <Filter>Sensors\Siren</Filter>
+    </ClInclude>
+    <ClInclude Include="IHSensor.h">
+      <Filter>Sensors</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
