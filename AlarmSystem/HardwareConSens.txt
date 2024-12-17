@@ -1,4 +1,4 @@
 Door:11:Ok
-Door:33:Ok
-Smoke:44:Ok
+Door:33:Alarm
+Smoke:44:Alarm
 WindowBroken:66:Ok

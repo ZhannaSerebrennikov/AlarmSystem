@@ -140,12 +140,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="BulglarAlarm.cpp" />
     <ClCompile Include="ControlPanel.cpp" />
     <ClCompile Include="Door.cpp" />
+    <ClCompile Include="DoorOpenAlarm.cpp" />
+    <ClCompile Include="FierAlarm.cpp" />
+    <ClCompile Include="Logger.cpp" />
     <ClCompile Include="SensorFactory.cpp" />
     <ClCompile Include="Siren.cpp" />
     <ClCompile Include="Smoke.cpp" />
     <ClCompile Include="WindowBroken.cpp" />
+    <ClCompile Include="WindowBrokenAlarm.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataHelper\DataHelper.vcxproj">
@@ -157,17 +162,23 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="HardwareConSens.txt" />
-    <Text Include="Text.txt" />
     <Text Include="VirtualConnectedSensors.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BulglarAlarm.h" />
     <ClInclude Include="ControlPanel.h" />
     <ClInclude Include="Door.h" />
+    <ClInclude Include="DoorOpenAlarm.h" />
+    <ClInclude Include="FierAlarm.h" />
     <ClInclude Include="ISensor.h" />
+    <ClInclude Include="ISubject.h" />
+    <ClInclude Include="IObserver.h" />
+    <ClInclude Include="Logger.h" />
     <ClInclude Include="SensorFactory.h" />
     <ClInclude Include="Siren.h" />
     <ClInclude Include="Smoke.h" />
     <ClInclude Include="WindowBroken.h" />
+    <ClInclude Include="WindowBrokenAlarm.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

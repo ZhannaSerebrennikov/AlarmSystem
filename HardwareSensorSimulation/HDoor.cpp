@@ -3,7 +3,7 @@
 
 std::mutex HDoor::m_mtx;
 
-HDoor::HDoor(SensorData& sensordata, MessageQueue& mq): m_sensorData(sensordata), m_messageQueue(mq)
+HDoor::HDoor(SensorData& sensordata): m_sensorData(sensordata)
 {
 }
 
@@ -12,24 +12,54 @@ void HDoor::Operate()
 	while (true)
 	{
 		m_mtx.lock();
-			ListenToControlPanel();
+		if (m_IsTriggered)
+		{
+			SendPacket(m_sensorData);
+		}
+		ListenToControlPanel();
 		m_mtx.unlock();
 
 		std::this_thread::sleep_for(std::chrono::seconds(1));
 	}
 }
 
-void HDoor::ListenToControlPanel() {
-	if (!m_messageQueue.IsEmpty() && m_messageQueue.GetQueueDstMacAddress() == m_sensorData.macAddress)
+void HDoor::SendPacket(SensorData& m_sensorData)
+{
+	MessagePacket msg;
+
+	msg.CreatePacket(m_sensorData, 0);
+	RFCommunication::SendPacket(msg);
+
+	std::cout << "Sensor " << m_sensorData.macAddress << " SENT: Data from sensor" << m_sensorData.macAddress << std::endl;
+}
+
+void HDoor::ListenToControlPanel() 
+{
+	if (RFCommunication::HasMessage())
 	{
-		m_sensorData = m_messageQueue.Receive().GetSensorData();
+		if (RFCommunication::GetMessageDstMacAdress() == m_sensorData.macAddress)
+		{
+			MessagePacket msg = RFCommunication::ReceivePacket();
+			std::cout << "Sensor " << msg.GetDstMacAddress() << " RECEIVED data from Control Panel" << std::endl;
 
-		std::cout << "Data of  sensor mackAddress " << m_sensorData.macAddress << "was receved" << std::endl;
-		m_sensorData.sensorStatus = SensorStatusEnum::OK;
-		std::cout << "Data of  sensor mackAddress " << m_sensorData.macAddress << "was send with new status" << std::endl;
-
-		MessagePacket packet;
-		packet.CreatePacket(m_sensorData, 0);
-		m_messageQueue.Send(packet);
+			SendPacket(m_sensorData);
+		}
 	}
 }
+
+/*void HDoor::ListenToControlPanel() {
+	
+	if (RFCommunication::ReceivePacket().GetDstMacAddress() == m_sensorData.macAddress)
+	{	
+		SensorData temp = RFCommunication::ReceivePacket().GetSensorData();
+
+		if (m_sensorData.sensorStatus == SensorStatusEnum::OK)
+			m_sensorData = temp;
+
+		std::cout << "Data of  sensor mackAddress " << m_sensorData.macAddress << "was receved from Contro Panel" << std::endl;
+		//m_sensorData.sensorStatus = SensorStatusEnum::OK;
+		std::cout << "Data of  sensor mackAddress " << m_sensorData.macAddress << "was send to Control Panel with current status " << ObjectType::SensorStatusEnumToString(m_sensorData.sensorStatus)<< std::endl;
+
+		SendPacket(m_sensorData);
+	}
+}*/

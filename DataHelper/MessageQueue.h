@@ -7,8 +7,8 @@
 
 class MessageQueue {
 public:
-	void Send(const MessagePacket& message);
-	MessagePacket Receive();
+	void Enqueue(const MessagePacket& message);
+	MessagePacket Dequeue();
 	bool IsEmpty();
 	int GetQueueDstMacAddress();
 

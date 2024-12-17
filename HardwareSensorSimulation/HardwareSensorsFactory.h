@@ -7,7 +7,7 @@
 class HardwareSensorsFactory {
 public:
 	//callback function for creating objects
-	static std::unique_ptr<IHSensor> CreateObject(SensorData& sensorData, MessageQueue& messageQueue);
+	static std::unique_ptr<IHSensor> CreateObject(SensorData& sensorData);
 
 private:
 	HardwareSensorsFactory() {}

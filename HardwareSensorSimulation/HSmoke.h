@@ -1,15 +1,16 @@
 #pragma once
 #include "IHSensor.h"
-#include "../DataHelper/MessageQueue.h"
 
 class HSmoke : public IHSensor {
 public:
-	HSmoke(SensorData& sensordata, MessageQueue& mq);
+	HSmoke(SensorData& sensordata);
+
 	void Operate();
+	void SendPacket(SensorData& m_sensorData);
 	void ListenToControlPanel();
 
 private:
 	SensorData m_sensorData;
-	MessageQueue& m_messageQueue;
+	bool m_IsTriggered = false;
 	static std::mutex m_mtx;
 };

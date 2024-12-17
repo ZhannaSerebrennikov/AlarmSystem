@@ -9,15 +9,15 @@ enum class ObjectTypeEnum {
 };
 
 enum class SensorStatusEnum {
-	OK,
-	ALARM,
-	MISSING
+	OK = 0,
+	ALARM = 1,
+	MISSING = 2
 };
 
 struct SensorData {
 	ObjectTypeEnum objType;
-	int macAddress;
 	SensorStatusEnum sensorStatus;
+	int macAddress;
 };
 
 
@@ -26,4 +26,5 @@ public:
 	static ObjectTypeEnum ObjectTypeStringToEnum(const std::string& str);
 
 	static SensorStatusEnum SensorStatusStringToEnum(const std::string& str);
+	static std::string SensorStatusEnumToString(const SensorStatusEnum enm);
 };

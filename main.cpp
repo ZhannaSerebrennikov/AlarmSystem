@@ -10,14 +10,15 @@
 #include "HardwareSensorSimulation//HSiren.h"
 #include "HardwareSensorSimulation/HSmoke.h"
 #include "HardwareSensorSimulation/HWindowBroken.h"
-
+#include "AlarmSystem/Door.h"
+#include "AlarmSystem/Logger.h"
 
 //std::mutex HDoor::m_mtx;
 //std::mutex HSiren::m_mtx;
 //std::mutex HSmoke::m_mtx;
 //std::mutex HWindowBroken::m_mtx;
 
-void CreateHardwareDevices(std::vector<std::unique_ptr<IHSensor>>& hardwareSensorDevices, std::vector <std::thread>& threads, MessageQueue& messageQueue)
+void CreateHardwareDevices(std::vector<std::unique_ptr<IHSensor>>& hardwareSensorDevices, std::vector <std::thread>& threads)
 {
 	std::vector<SensorData> enumSensorVector;
 
@@ -27,7 +28,7 @@ void CreateHardwareDevices(std::vector<std::unique_ptr<IHSensor>>& hardwareSenso
 
 	for (SensorData& sensor : enumSensorVector)
 	{
-		hardwareSensorDevices.push_back(HardwareSensorsFactory::CreateObject(sensor, messageQueue));
+		hardwareSensorDevices.push_back(HardwareSensorsFactory::CreateObject(sensor));
 		threads.emplace_back(&IHSensor::Operate, hardwareSensorDevices.back().get());
 	}
 
@@ -37,14 +38,16 @@ void CreateHardwareDevices(std::vector<std::unique_ptr<IHSensor>>& hardwareSenso
 int main()
 {
 	std::vector<std::unique_ptr<IHSensor>> v_hardwareSensors;
-	MessageQueue messageQueue;
 
-	ControlPanel mainPanel(messageQueue);
+	Logger::GetInstance().OpenLogFile("LogFile.txt");
+	//MessageQueue messageQueue;
+
+	ControlPanel mainPanel;
 	std::thread cpThread(&ControlPanel::Start, &mainPanel);
 
 	std::vector <std::thread> v_threads;
 
-	CreateHardwareDevices(v_hardwareSensors, v_threads, messageQueue);
+	CreateHardwareDevices(v_hardwareSensors, v_threads);
 
 	cpThread.join();
 
@@ -52,6 +55,8 @@ int main()
 		
 		thread.join();
 	}
+
+	Logger::GetInstance().CloseLogFile();
 
 	return 0;
 }

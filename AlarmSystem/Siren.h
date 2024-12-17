@@ -1,13 +1,30 @@
 #pragma once
-#include "ISensor.h"
+#include <memory>
+#include <mutex>
+#include <vector>
+#include "IObserver.h"
 #include "../DataHelper/ObjectType.h"
+#include "ISensor.h"
 
 class Siren : public ISensor {
 public:
 	Siren(SensorData);
-	SensorData GetSensorData() const;
-	void SetSensorData(SensorData data);
+	SensorData GetSensorData() const override;
+	void SetSensorData(SensorData data) override;
+
+	void SetStatus(const SensorStatusEnum& newStatus);
+
+	ObjectTypeEnum GetSensorType() const override;
+
+	SensorStatusEnum GetStatus() const;
+	void AddObserver(std::shared_ptr<IObserver> observer) override;
+	void RemoveObserver(std::shared_ptr<IObserver> observer) override;
+	void NotifyObservers() override;
 
 private:
 	SensorData m_sensorData;
+	std::atomic<bool> stop;
+
+	std::string m_status;
+	//std::vector<std::shared_ptr<IObserver>> m_observers;
 };

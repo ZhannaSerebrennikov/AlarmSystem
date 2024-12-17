@@ -43,3 +43,23 @@ SensorStatusEnum ObjectType::SensorStatusStringToEnum(const std::string& str)
 		throw std::invalid_argument("Invalid enum string");
 	}
 }
+
+std::string ObjectType::SensorStatusEnumToString(const SensorStatusEnum enm)
+{
+	static const std::map<SensorStatusEnum, std::string> sensStatusMap = {
+		{SensorStatusEnum::ALARM, "Alarm"},
+		{SensorStatusEnum::OK, "Ok"},
+		{SensorStatusEnum::MISSING, "Missing"}
+	};
+
+	auto it = sensStatusMap.find(enm);
+
+	if (it != sensStatusMap.end())
+	{
+		return it->second;
+	}
+	else {
+		// Handle the case where the string doesn't match any enum value
+		throw std::invalid_argument("Invalid enum string");
+	}
+}

@@ -154,6 +154,9 @@
     <ClInclude Include="IHSensor.h" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Communication\Communication.vcxproj">
+      <Project>{003656f1-526a-4e97-8d68-382c7f200792}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\DataHelper\DataHelper.vcxproj">
       <Project>{cd4de28a-985b-4286-8c3b-9db3c5f81367}</Project>
     </ProjectReference>

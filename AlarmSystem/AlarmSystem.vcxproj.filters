@@ -34,6 +34,27 @@
     <Filter Include="Factory">
       <UniqueIdentifier>{84c8fc96-8a9e-4c10-8776-7e8ad6d794df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Alarm">
+      <UniqueIdentifier>{9b9121c3-e4ea-4771-a6d5-86a8e8d1b19f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Alarm\BulglarAlarm">
+      <UniqueIdentifier>{faa3ed53-5da4-4d0c-b10c-9aa24c34cca2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Alarm\FierAlarm">
+      <UniqueIdentifier>{1a1164f9-556b-40af-89fb-aa472f6ccd84}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Alarm\DoorOpenAlarm">
+      <UniqueIdentifier>{37e06fae-9e4c-46be-840d-a367c2f35f9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Observer">
+      <UniqueIdentifier>{4f20e070-975f-46cc-87f9-f4302de2ae5a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Alarm\WindowBrokenAlarm">
+      <UniqueIdentifier>{c77d29b5-6027-4864-ac0c-73aa5df28419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Logger">
+      <UniqueIdentifier>{c7875408-f2e0-45cc-9bf6-d18c9ab6be95}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -57,15 +78,27 @@
     <ClCompile Include="SensorFactory.cpp">
       <Filter>Factory</Filter>
     </ClCompile>
+    <ClCompile Include="BulglarAlarm.cpp">
+      <Filter>Alarm\BulglarAlarm</Filter>
+    </ClCompile>
+    <ClCompile Include="DoorOpenAlarm.cpp">
+      <Filter>Alarm\DoorOpenAlarm</Filter>
+    </ClCompile>
+    <ClCompile Include="FierAlarm.cpp">
+      <Filter>Alarm\FierAlarm</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowBrokenAlarm.cpp">
+      <Filter>Alarm\WindowBrokenAlarm</Filter>
+    </ClCompile>
+    <ClCompile Include="Logger.cpp">
+      <Filter>Logger</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="HardwareConSens.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="VirtualConnectedSensors.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="Text.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
@@ -90,6 +123,27 @@
     </ClInclude>
     <ClInclude Include="SensorFactory.h">
       <Filter>Factory</Filter>
+    </ClInclude>
+    <ClInclude Include="IObserver.h">
+      <Filter>Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="ISubject.h">
+      <Filter>Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="BulglarAlarm.h">
+      <Filter>Alarm\BulglarAlarm</Filter>
+    </ClInclude>
+    <ClInclude Include="DoorOpenAlarm.h">
+      <Filter>Alarm\DoorOpenAlarm</Filter>
+    </ClInclude>
+    <ClInclude Include="FierAlarm.h">
+      <Filter>Alarm\FierAlarm</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowBrokenAlarm.h">
+      <Filter>Alarm\WindowBrokenAlarm</Filter>
+    </ClInclude>
+    <ClInclude Include="Logger.h">
+      <Filter>Logger</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
