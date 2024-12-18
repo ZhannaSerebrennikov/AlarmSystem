@@ -3,6 +3,7 @@
 #include "../Communication/RFCommunication.h"
 #include "../DataHelper/MessageQueue.h"
 #include "../DataHelper/ObjectType.h"
+#include "../AlarmSystem/Logger.h"
 
 
 class IHSensor {

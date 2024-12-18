@@ -17,6 +17,10 @@ void BulglarAlarm::Update(SensorStatusEnum status)
 {
 	if (status == SensorStatusEnum::ALARM)
 	{
+		std::string message = "Bulglary Alarm! ";
+
+		Logger::GetInstance().Log(message);
+
 		std::cout << "Bulglary Alarm! " << std::endl;
 	}
 }

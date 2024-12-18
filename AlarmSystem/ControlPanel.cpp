@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "ControlPanel.h"
 #include "SensorFactory.h"
 #include "../DataHelper/TXTDataReader.h"
@@ -68,12 +69,13 @@ void ControlPanel::Monitoring()
 
 			if (RFCommunication::GetMessageDstMacAdress() == 0)
 			{
-				//(*it)->SetSensorData(m_messageQueue.Dequeue().GetSensorData());
 				(*it)->SetSensorData(RFCommunication::ReceivePacket().GetSensorData());
 
-				Logger::GetInstance().Log("Data from sensor was received");
+				std::string message = "Data from  sensor mackAddress " + std::to_string((*it)->GetSensorData().macAddress) + " was receved with a status " + ObjectType::SensorStatusEnumToString((*it)->GetSensorData().sensorStatus) + ".";
 
-				std::cout << "Data from  sensor mackAddress " << (*it)->GetSensorData().macAddress << "was receved with a status "<< ObjectType::SensorStatusEnumToString((*it)->GetSensorData().sensorStatus) <<"." << std::endl;
+				Logger::GetInstance().Log(message);
+
+				std::cout << "Data from  sensor mackAddress " << (*it)->GetSensorData().macAddress << " was receved with a status "<< ObjectType::SensorStatusEnumToString((*it)->GetSensorData().sensorStatus) <<"." << std::endl;
 			}
 
 			std::this_thread::sleep_for(std::chrono::seconds(3));
@@ -94,6 +96,10 @@ void ControlPanel::SendMessage(MessagePacket& packet, std::shared_ptr<ISensor> s
 
 	RFCommunication::SendPacket(packet);
 	//m_messageQueue.Enqueue(packet);
+
+	std::string message = "Control Panel Send Message to sensor " + std::to_string(sensor->GetSensorData().macAddress) + ".";
+
+	Logger::GetInstance().Log(message);
 
 	std::cout << "Control Panel Send Message to sensor "<< sensor->GetSensorData().macAddress << std::endl;
 

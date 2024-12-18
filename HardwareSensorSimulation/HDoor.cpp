@@ -30,6 +30,9 @@ void HDoor::SendPacket(SensorData& m_sensorData)
 	msg.CreatePacket(m_sensorData, 0);
 	RFCommunication::SendPacket(msg);
 
+	std::string message = "Sensor " + std::to_string(m_sensorData.macAddress) + " SENT: Data from sensor"+ std::to_string(m_sensorData.macAddress)+ ".";
+	Logger::GetInstance().Log(message);
+
 	std::cout << "Sensor " << m_sensorData.macAddress << " SENT: Data from sensor" << m_sensorData.macAddress << std::endl;
 }
 
@@ -40,6 +43,9 @@ void HDoor::ListenToControlPanel()
 		if (RFCommunication::GetMessageDstMacAdress() == m_sensorData.macAddress)
 		{
 			MessagePacket msg = RFCommunication::ReceivePacket();
+			std::string message = "Sensor " + std::to_string(msg.GetDstMacAddress()) + " RECEIVED data from Control Panel" + ".";
+			Logger::GetInstance().Log(message);
+
 			std::cout << "Sensor " << msg.GetDstMacAddress() << " RECEIVED data from Control Panel" << std::endl;
 
 			SendPacket(m_sensorData);

@@ -17,6 +17,9 @@ void DoorOpenAlarm::Update(SensorStatusEnum status)//OnNotify
 {
 	if (status == SensorStatusEnum::ALARM)
 	{
+		std::string message = "Door Open Alarm!";
+
+		Logger::GetInstance().Log(message);
 		std::cout << "Door Open Alarm! " << std::endl;
 	}
 }

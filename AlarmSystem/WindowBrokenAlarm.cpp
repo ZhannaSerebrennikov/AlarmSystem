@@ -16,7 +16,10 @@ void WindowBrokenAlarm::Update(SensorStatusEnum status)
 {
 	if (status == SensorStatusEnum::ALARM)
 	{
-		std::cout << "Fier Alarm! " << std::endl;
+		std::string message = "Window Broken! ";
+
+		Logger::GetInstance().Log(message);
+		std::cout << "Window Broken! " << std::endl;
 	}
 }
 
