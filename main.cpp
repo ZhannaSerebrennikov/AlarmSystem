@@ -12,6 +12,7 @@
 #include "HardwareSensorSimulation/HWindowBroken.h"
 #include "AlarmSystem/Door.h"
 #include "AlarmSystem/Logger.h"
+#include "AlarmSystem/AlarmSystem.h"
 
 //std::mutex HDoor::m_mtx;
 //std::mutex HSiren::m_mtx;
@@ -37,12 +38,15 @@ void CreateHardwareDevices(std::vector<std::unique_ptr<IHSensor>>& hardwareSenso
 
 int main()
 {
+	AlarmSystem alarmSystem;
 	std::vector<std::unique_ptr<IHSensor>> v_hardwareSensors;
 
 	Logger::GetInstance().OpenLogFile("LogFile.txt");
 	//MessageQueue messageQueue;
 
 	ControlPanel mainPanel;
+
+	alarmSystem.Run();
 	std::thread cpThread(&ControlPanel::Start, &mainPanel);
 
 	std::vector <std::thread> v_threads;
