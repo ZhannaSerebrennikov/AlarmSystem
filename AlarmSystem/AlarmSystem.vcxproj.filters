@@ -55,6 +55,9 @@
     <Filter Include="Logger">
       <UniqueIdentifier>{c7875408-f2e0-45cc-9bf6-d18c9ab6be95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AlarmSystem">
+      <UniqueIdentifier>{db534b17-4a0c-4514-b8c9-0b362cdf4a99}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -92,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="Logger.cpp">
       <Filter>Logger</Filter>
+    </ClCompile>
+    <ClCompile Include="AlarmSystem.cpp">
+      <Filter>AlarmSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +150,9 @@
     </ClInclude>
     <ClInclude Include="Logger.h">
       <Filter>Logger</Filter>
+    </ClInclude>
+    <ClInclude Include="AlarmSystem.h">
+      <Filter>AlarmSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

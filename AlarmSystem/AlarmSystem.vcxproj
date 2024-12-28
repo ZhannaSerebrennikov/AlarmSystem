@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
+    <ClCompile Include="AlarmSystem.cpp" />
     <ClCompile Include="BulglarAlarm.cpp" />
     <ClCompile Include="ControlPanel.cpp" />
     <ClCompile Include="Door.cpp" />
@@ -165,6 +166,7 @@
     <Text Include="VirtualConnectedSensors.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlarmSystem.h" />
     <ClInclude Include="BulglarAlarm.h" />
     <ClInclude Include="ControlPanel.h" />
     <ClInclude Include="Door.h" />
