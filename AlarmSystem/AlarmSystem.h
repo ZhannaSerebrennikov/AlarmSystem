@@ -13,6 +13,7 @@ public:
 	void Run();
 	void CreateHardwareDevices(std::vector<std::unique_ptr<IHSensor>>& hardwareSensorDevices, std::vector <std::thread>& threads);
 	void ShowMenu();
+	void RunSimulation();
 
 	~AlarmSystem();
 

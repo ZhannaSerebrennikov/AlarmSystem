@@ -1,4 +1,5 @@
 #include "AlarmSystem.h"
+#include <memory>
 
 AlarmSystem::AlarmSystem()
 {
@@ -13,22 +14,26 @@ AlarmSystem::~AlarmSystem()
 
 void AlarmSystem::Run()
 {
-	while (true)
-	{
+	//while (true)
+	//{
 		CreateHardwareDevices(v_hardwareSensors, v_threads);
-		std::thread cpThread(&ControlPanel::Start, &mainPanel);
-		std::thread guiThread(&AlarmSystem::ShowMenu, this);
 
-		//cpThread.join();
+		std::thread cpThread(&ControlPanel::Start, &mainPanel);
+		cpThread.detach();
+
+		//CreateHardwareDevices(v_hardwareSensors, v_threads);
+
+		std::thread guiThread(&AlarmSystem::ShowMenu, this);
+		guiThread.detach();
 
 		for (auto& thread : v_threads) {
 
 			thread.join();
 		}
 
-		cpThread.detach();
-		guiThread.detach();
-	}
+		//cpThread.detach();
+		//guiThread.detach();
+	//}
 
 }
 
@@ -57,8 +62,21 @@ void AlarmSystem::CreateHardwareDevices(std::vector<std::unique_ptr<IHSensor>>& 
 	for (SensorData& sensor : enumSensorVector)
 	{
 		hardwareSensorDevices.push_back(HardwareSensorsFactory::CreateObject(sensor));
+
 		threads.emplace_back(&IHSensor::Operate, hardwareSensorDevices.back().get());
+		//threads.back().join();
 	}
 
 }
-
+/*void AlarmSystem::RunSimulation()
+{
+	for (auto& sensor : v_hardwareSensors)
+	{
+		if (sensor) {
+			std::thread sensorThread([sensor]() {
+				std::this_thread::sleep_for(std::chrono::seconds(3));
+				sensor->Operate();
+				});
+			sensorThread.detach();
+	}
+ }*/
