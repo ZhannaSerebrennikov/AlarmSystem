@@ -19,7 +19,7 @@ void HSmoke::Operate()
 			ListenToControlPanel();
 		m_mtx.unlock();
 
-		std::this_thread::sleep_for(std::chrono::seconds(1));
+		std::this_thread::sleep_for(std::chrono::seconds(3));
 	}
 }
 

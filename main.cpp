@@ -39,32 +39,8 @@
 int main()
 {
 	AlarmSystem alarmSystem;
-	//std::vector<std::unique_ptr<IHSensor>> v_hardwareSensors;
 
-	//Logger::GetInstance().OpenLogFile("LogFile.txt");
-	//MessageQueue messageQueue;
-
-	//ControlPanel mainPanel;
-
-	//alarmSystem.Run();
-	//std::thread cpThread(&ControlPanel::Start, &mainPanel);
-	std::thread systemThtread(&AlarmSystem::Run, &alarmSystem);
-
-	//std::vector <std::thread> v_threads;
-
-	//CreateHardwareDevices(v_hardwareSensors, v_threads);
-
-	//cpThread.join();
-	systemThtread.join();
-
-	/*for (auto& thread : v_threads) {
-		
-		thread.join();
-	}*/
-
-	//alarmSystem.Run();
-
-	//Logger::GetInstance().CloseLogFile();
+	alarmSystem.Run();
 
 	return 0;
 }

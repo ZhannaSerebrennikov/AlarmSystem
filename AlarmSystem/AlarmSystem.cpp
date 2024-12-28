@@ -14,27 +14,17 @@ AlarmSystem::~AlarmSystem()
 
 void AlarmSystem::Run()
 {
-	//while (true)
-	//{
-		CreateHardwareDevices(v_hardwareSensors, v_threads);
+	CreateHardwareDevices(v_hardwareSensors, v_threads);
+	for (auto& thread : v_threads) {
 
-		std::thread cpThread(&ControlPanel::Start, &mainPanel);
-		cpThread.detach();
+		thread.detach();
+	}
 
-		//CreateHardwareDevices(v_hardwareSensors, v_threads);
+	std::thread cpThread(&ControlPanel::Start, &mainPanel);
+	cpThread.detach();
 
-		std::thread guiThread(&AlarmSystem::ShowMenu, this);
-		guiThread.detach();
-
-		for (auto& thread : v_threads) {
-
-			thread.join();
-		}
-
-		//cpThread.detach();
-		//guiThread.detach();
-	//}
-
+	std::thread guiThread(&AlarmSystem::ShowMenu, this);
+	guiThread.join();
 }
 
 void AlarmSystem::ShowMenu()
