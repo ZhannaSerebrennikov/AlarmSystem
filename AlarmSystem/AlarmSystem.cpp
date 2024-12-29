@@ -3,13 +3,13 @@
 
 AlarmSystem::AlarmSystem()
 {
-	Logger::GetInstance().OpenLogFile("LogFile.txt");
+	Logger::GetInstance()->OpenLogFile("LogFile.txt");
 	
 }
 
 AlarmSystem::~AlarmSystem()
 {
-	Logger::GetInstance().CloseLogFile();
+	Logger::GetInstance()->CloseLogFile();
 }
 
 void AlarmSystem::Run()

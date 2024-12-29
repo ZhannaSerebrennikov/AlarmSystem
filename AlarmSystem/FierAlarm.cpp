@@ -18,7 +18,9 @@ void FierAlarm::Update(SensorStatusEnum status)
 	{
 		std::string message = "Fier Alarm! ";
 
-		Logger::GetInstance().Log(message);
+		Logger* logger = Logger::GetInstance();
+		logger->Log(message);
+
 		std::cout << "Fier Alarm! " << std::endl;
 	}
 }

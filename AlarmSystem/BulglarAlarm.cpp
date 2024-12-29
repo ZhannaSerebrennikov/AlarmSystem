@@ -19,7 +19,8 @@ void BulglarAlarm::Update(SensorStatusEnum status)
 	{
 		std::string message = "Bulglary Alarm! ";
 
-		Logger::GetInstance().Log(message);
+		Logger* logger = Logger::GetInstance();
+		logger->Log(message);
 
 		std::cout << "Bulglary Alarm! " << std::endl;
 	}

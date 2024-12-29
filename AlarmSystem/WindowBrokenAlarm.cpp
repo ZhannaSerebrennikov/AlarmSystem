@@ -18,7 +18,9 @@ void WindowBrokenAlarm::Update(SensorStatusEnum status)
 	{
 		std::string message = "Window Broken! ";
 
-		Logger::GetInstance().Log(message);
+		Logger* logger = Logger::GetInstance();
+		logger->Log(message);
+
 		std::cout << "Window Broken! " << std::endl;
 	}
 }

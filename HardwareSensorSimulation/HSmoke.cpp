@@ -31,7 +31,9 @@ void HSmoke::SendPacket(SensorData& m_sensorData)
 	RFCommunication::SendPacket(msg);
 
 	std::string message = "Sensor " + std::to_string(m_sensorData.macAddress) + " SENT: Data from sensor" + std::to_string(m_sensorData.macAddress) + ".";
-	Logger::GetInstance().Log(message);
+
+	Logger* logger = Logger::GetInstance();
+	logger->Log(message);
 
 	std::cout << "Sensor " << m_sensorData.macAddress << " SENT: Data from sensor" << m_sensorData.macAddress << std::endl;
 }
@@ -45,7 +47,9 @@ void HSmoke::ListenToControlPanel()
 			MessagePacket msg = RFCommunication::ReceivePacket();
 
 			std::string message = "Sensor " + std::to_string(msg.GetDstMacAddress()) + " RECEIVED data from Control Panel" + ".";
-			Logger::GetInstance().Log(message);
+
+			Logger* logger = Logger::GetInstance();
+			logger->Log(message);
 
 			std::cout << "Sensor " << msg.GetDstMacAddress() << " RECEIVED data from Control Panel" << std::endl;
 

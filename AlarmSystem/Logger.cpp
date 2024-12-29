@@ -1,16 +1,20 @@
 #include "Logger.h"
 
+Logger* Logger::s_instance = nullptr;
 
 Logger::Logger() 
 {
 	std::cout << "Logger Initialized." << std::endl;
 }
 
-Logger& Logger::GetInstance()
+Logger* Logger::GetInstance()
 {
-	static Logger* s_instance = new Logger();
+	if (s_instance == nullptr)
+	{
+		s_instance = new Logger();
+	}
 
-	return *s_instance;
+	return s_instance;
 }
 
 void Logger::Log(const std::string& message)

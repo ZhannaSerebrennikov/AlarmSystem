@@ -73,7 +73,8 @@ void ControlPanel::Monitoring()
 
 				std::string message = "Data from  sensor mackAddress " + std::to_string((*it)->GetSensorData().macAddress) + " was receved with a status " + ObjectType::SensorStatusEnumToString((*it)->GetSensorData().sensorStatus) + ".";
 
-				Logger::GetInstance().Log(message);
+				Logger* logger = Logger::GetInstance();
+				logger->Log(message);
 
 				std::cout << "Data from  sensor mackAddress " << (*it)->GetSensorData().macAddress << " was receved with a status "<< ObjectType::SensorStatusEnumToString((*it)->GetSensorData().sensorStatus) <<"." << std::endl;
 			}
@@ -99,7 +100,8 @@ void ControlPanel::SendMessage(MessagePacket& packet, std::shared_ptr<ISensor> s
 
 	std::string message = "Control Panel Send Message to sensor " + std::to_string(sensor->GetSensorData().macAddress) + ".";
 
-	Logger::GetInstance().Log(message);
+	Logger* logger = Logger::GetInstance();
+	logger->Log(message);
 
 	std::cout << "Control Panel Send Message to sensor "<< sensor->GetSensorData().macAddress << std::endl;
 
