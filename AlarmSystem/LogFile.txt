@@ -1,2 +1,0 @@
-Log file opened.
-Data from sensor was received
