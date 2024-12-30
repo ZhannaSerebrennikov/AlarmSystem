@@ -17,7 +17,7 @@ private:
 	Logger(const Logger&) = delete;
 	Logger& operator=(const Logger&) = delete;
 
-	static Logger* s_instance;
+	//static Logger* s_instance;
 	std::mutex m_mutex;
 	std::ofstream m_logFile;
 };

@@ -1,6 +1,6 @@
 #include "Logger.h"
 
-Logger* Logger::s_instance = nullptr;
+//Logger* Logger::s_instance = nullptr;
 
 Logger::Logger() 
 {
@@ -9,12 +9,9 @@ Logger::Logger()
 
 Logger* Logger::GetInstance()
 {
-	if (s_instance == nullptr)
-	{
-		s_instance = new Logger();
-	}
+	static Logger instance;
 
-	return s_instance;
+	return &instance;
 }
 
 void Logger::Log(const std::string& message)
