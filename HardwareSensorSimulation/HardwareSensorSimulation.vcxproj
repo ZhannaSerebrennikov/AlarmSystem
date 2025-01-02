@@ -144,6 +144,7 @@
     <ClCompile Include="HSiren.cpp" />
     <ClCompile Include="HSmoke.cpp" />
     <ClCompile Include="HWindowBroken.cpp" />
+    <ClCompile Include="HMotion.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="HardwareSensorsFactory.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="HSmoke.h" />
     <ClInclude Include="HWindowBroken.h" />
     <ClInclude Include="IHSensor.h" />
+    <ClInclude Include="HMotion.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Communication\Communication.vcxproj">
