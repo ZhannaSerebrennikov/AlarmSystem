@@ -22,6 +22,10 @@ std::unique_ptr<ISensor> SensorFactory::CreateObject(SensorData& sensorData) {
 	{
 		return std::make_unique<WindowBroken>(sensorData);
 	}
+	else if (sensorData.objType == ObjectTypeEnum::MOTION)
+	{
+		return std::make_unique<Siren>(sensorData);
+	}
 
 	return nullptr;
 }
