@@ -61,6 +61,9 @@
     <Filter Include="Sensors\Motion">
       <UniqueIdentifier>{3af81608-3740-404a-946c-008e587c424f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Alarm\MotionAlarm">
+      <UniqueIdentifier>{8d0d31cb-35fb-4830-921d-6aa45015507a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -104,6 +107,9 @@
     </ClCompile>
     <ClCompile Include="Motion.cpp">
       <Filter>Sensors\Motion</Filter>
+    </ClCompile>
+    <ClCompile Include="MotionAlarm.cpp">
+      <Filter>Alarm\MotionAlarm</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +168,9 @@
     </ClInclude>
     <ClInclude Include="Motion.h">
       <Filter>Sensors\Motion</Filter>
+    </ClInclude>
+    <ClInclude Include="MotionAlarm.h">
+      <Filter>Alarm\MotionAlarm</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

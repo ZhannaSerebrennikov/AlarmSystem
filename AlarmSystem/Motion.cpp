@@ -1,9 +1,9 @@
 #include "Motion.h"
-#include "FierAlarm.h"
+#include "MotionAlarm.h"
 
 Motion::Motion(SensorData sensorData) :m_sensorData(sensorData)
 {
-	std::shared_ptr<IObserver> observer = std::make_shared<FierAlarm>(this);
+	std::shared_ptr<IObserver> observer = std::make_shared<MotionAlarm>(this);
 
 	this->AddObserver(observer);
 }

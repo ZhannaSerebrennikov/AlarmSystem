@@ -148,6 +148,7 @@
     <ClCompile Include="FierAlarm.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Motion.cpp" />
+    <ClCompile Include="MotionAlarm.cpp" />
     <ClCompile Include="SensorFactory.cpp" />
     <ClCompile Include="Siren.cpp" />
     <ClCompile Include="Smoke.cpp" />
@@ -178,6 +179,7 @@
     <ClInclude Include="IObserver.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Motion.h" />
+    <ClInclude Include="MotionAlarm.h" />
     <ClInclude Include="SensorFactory.h" />
     <ClInclude Include="Siren.h" />
     <ClInclude Include="Smoke.h" />
