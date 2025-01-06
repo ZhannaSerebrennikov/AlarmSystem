@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="HardwareSensorsFactory.cpp" />
     <ClCompile Include="HDoor.cpp" />
     <ClCompile Include="HSiren.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="HMotion.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GUI.h" />
     <ClInclude Include="HardwareSensorsFactory.h" />
     <ClInclude Include="HDoor.h" />
     <ClInclude Include="HSiren.h" />
