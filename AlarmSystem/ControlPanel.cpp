@@ -19,6 +19,32 @@ ControlPanel::ControlPanel(): m_controlPanelMacAddress(0)
 	AddAllSensorsToControlPanel(sensorDataFromFile);
 }
 
+ControlPanel::ControlPanel(const ControlPanel& controlPanel) : m_controlPanelMacAddress(controlPanel.m_controlPanelMacAddress)//, stop(controlPanel.stop.load())
+{
+	for (const auto& sensor : controlPanel.m_sensorVector)
+	{
+		//m_sensorVector.push_back(std::make_shared<ISensor>(&sensor));//deep copy for the m_sensorVector for creating new shared pointers for each object
+	}
+}
+
+ControlPanel& ControlPanel::operator=(const ControlPanel controlPanel)
+{
+	if (this == &controlPanel)
+	{
+		return *this;
+	}
+
+	m_controlPanelMacAddress = controlPanel.m_controlPanelMacAddress;
+	//stop.store(controlPanel.stop.load());
+
+	for (const auto& sensor : m_sensorVector) //deep copy
+	{
+		//m_sensorVector.push_back(std::make_shared<ISensor>(*sensor));
+	}
+
+	return *this;
+}
+
 void ControlPanel::AddAllSensorsToControlPanel(std::vector<SensorData>& sensorDataFromFile)
 {
 	for (const SensorData& data : sensorDataFromFile)
