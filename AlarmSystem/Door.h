@@ -11,6 +11,7 @@ public:
 	Door(SensorData sensorData);
 	SensorData GetSensorData() const override;
 	void SetSensorData(SensorData data) override;
+	const std::vector<std::shared_ptr<IObserver>>& GetObservers() const override;
 
 	void SetStatus(const SensorStatusEnum& newStatus);
 	SensorStatusEnum GetStatus() const;

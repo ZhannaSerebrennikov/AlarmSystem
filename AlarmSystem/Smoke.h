@@ -20,6 +20,7 @@ public:
 	void AddObserver(std::shared_ptr<IObserver> observer) override;
 	void RemoveObserver(std::shared_ptr<IObserver> observer) override;
 	void NotifyObservers() override;
+	const std::vector<std::shared_ptr<IObserver>>& GetObservers() const override;
 
 private:
 	SensorData m_sensorData;

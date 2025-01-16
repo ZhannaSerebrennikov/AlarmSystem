@@ -60,3 +60,7 @@ void WindowBroken::NotifyObservers()
 		(*it)->Update(m_sensorData.sensorStatus);
 	}
 }
+
+const std::vector<std::shared_ptr<IObserver>>& WindowBroken::GetObservers() const{
+	return m_observers;
+}

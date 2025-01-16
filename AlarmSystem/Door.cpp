@@ -59,3 +59,7 @@ void Door::NotifyObservers()
 		(*it)->Update(m_sensorData.sensorStatus);
 	}
 }
+
+const std::vector<std::shared_ptr<IObserver>>& Door::GetObservers() const {
+	return m_observers;
+}

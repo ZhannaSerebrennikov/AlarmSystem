@@ -14,6 +14,8 @@ MotionAlarm::~MotionAlarm()
 
 void MotionAlarm::Update(SensorStatusEnum status)
 {
+	SetAlarmStatus(status);
+
 	if (status == SensorStatusEnum::ALARM)
 	{
 		std::string message = "Motion Detection Alarm! ";
@@ -26,4 +28,9 @@ void MotionAlarm::Update(SensorStatusEnum status)
 void MotionAlarm::SetAlarmStatus(SensorStatusEnum status)
 {
 	m_alarmstatus = status;
+}
+
+bool MotionAlarm::IsActive() const
+{
+	return m_alarmstatus == SensorStatusEnum::ALARM;
 }

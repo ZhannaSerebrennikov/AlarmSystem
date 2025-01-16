@@ -1,21 +1,31 @@
 #include "GUI.h"
 
-GUI::GUI() 
+GUI::GUI(SensorData sensorData) : m_sensorData(sensorData)
 {
 
 }
 
-void GUI::SetActiveAlarms(std::string activeAlarm)
+void GUI::SetActiveAlarms(const std::vector<std::shared_ptr<IObserver>>& activeAlarms)
 {
-	m_AcriveAlarms.push_back(activeAlarm);
+	m_ActiveAlarms = activeAlarms;
 }
 
-std::vector<std::string> GUI::GetActiveAlarms()
+const std::vector<std::shared_ptr<IObserver>> GUI::GetActiveAlarms()
 {
-	return m_AcriveAlarms;
+	return m_ActiveAlarms;
 }
 
 void GUI::RemoveActiveAlarm(std::string alarmToRemove)
 {
 	//TODO
+}
+
+const std::vector<std::shared_ptr<IObserver>> GUI::GetData()
+{
+	return GetActiveAlarms();
+}
+
+SensorData GUI::GetSensorData() const
+{
+	return m_sensorData;
 }
