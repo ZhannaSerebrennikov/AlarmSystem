@@ -14,6 +14,8 @@ FierAlarm::~FierAlarm()
 
 void FierAlarm::Update(SensorStatusEnum status)
 {
+	SetAlarmStatus(status);
+
 	if (status == SensorStatusEnum::ALARM)
 	{
 		std::string message = "Fier Alarm! ";
@@ -26,4 +28,9 @@ void FierAlarm::Update(SensorStatusEnum status)
 void FierAlarm::SetAlarmStatus(SensorStatusEnum status)
 {
 	m_alarmstatus = status;
+}
+
+bool FierAlarm::IsActive() const
+{
+	return m_alarmstatus == SensorStatusEnum::ALARM;
 }

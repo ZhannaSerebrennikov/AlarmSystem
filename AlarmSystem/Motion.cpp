@@ -55,3 +55,7 @@ void Motion::NotifyObservers()
 		observer->Update(m_sensorData.sensorStatus);
 	}
 }
+
+const std::vector<std::shared_ptr<IObserver>>& Motion::GetObservers() const {
+	return m_observers;
+}

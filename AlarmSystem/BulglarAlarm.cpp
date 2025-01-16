@@ -15,6 +15,8 @@ BulglarAlarm::~BulglarAlarm()
 
 void BulglarAlarm::Update(SensorStatusEnum status)
 {
+	SetAlarmStatus(status);
+
 	if (status == SensorStatusEnum::ALARM)
 	{
 		std::string message = "Bulglary Alarm! ";
@@ -28,4 +30,9 @@ void BulglarAlarm::Update(SensorStatusEnum status)
 void BulglarAlarm::SetAlarmStatus(SensorStatusEnum status)
 {
 	alarmStatus = status;
+}
+
+bool BulglarAlarm::IsActive() const
+{
+	return alarmStatus == SensorStatusEnum::ALARM;
 }

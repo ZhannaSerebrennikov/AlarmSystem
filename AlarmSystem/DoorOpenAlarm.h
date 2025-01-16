@@ -9,7 +9,11 @@ public:
 	~DoorOpenAlarm();
 
 	void Update(SensorStatusEnum status);//OnNotify
+	bool IsActive() const override;
 	void SetAlarmStatus(SensorStatusEnum status);
+	void DisplayAlarm() const override {
+		std::cout << "Door Open Alarm triggered! Sensor MacAdress " << m_sensor->GetSensorData().macAddress << std::endl;
+	}
 
 private:
 	SensorStatusEnum alarmStatus;
