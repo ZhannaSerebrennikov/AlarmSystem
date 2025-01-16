@@ -3,7 +3,7 @@
 
 std::mutex HWindowBroken::m_mtx;
 
-HWindowBroken::HWindowBroken(SensorData& sensordata) : m_sensorData(sensordata)
+HWindowBroken::HWindowBroken(const SensorData& sensordata) : m_sensorData(sensordata)
 {
 }
 
@@ -12,13 +12,13 @@ void HWindowBroken::Operate()
 {
 	while (true)
 	{
-		m_mtx.lock();
+		//m_mtx.lock();
 			if (m_IsTriggered)
 			{
 				SendPacket(m_sensorData);
 			}
 			ListenToControlPanel();
-		m_mtx.unlock();
+		//m_mtx.unlock();
 
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 	}

@@ -3,7 +3,7 @@
 
 std::mutex HMotion::m_mtx;
 
-HMotion::HMotion(SensorData& sensordata) : m_sensorData(sensordata)
+HMotion::HMotion(const SensorData& sensordata) : m_sensorData(sensordata)
 {
 }
 
@@ -11,13 +11,13 @@ void HMotion::Operate()
 {
 	while (true)
 	{
-		m_mtx.lock();
+		//m_mtx.lock();
 		if (m_IsTriggered)
 		{
 			SendPacket(m_sensorData);
 		}
 		ListenToControlPanel();
-		m_mtx.unlock();
+		//m_mtx.unlock();
 
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 	}

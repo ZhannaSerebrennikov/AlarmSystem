@@ -3,7 +3,7 @@
 
 std::mutex HSmoke::m_mtx;
 
-HSmoke::HSmoke(SensorData& sensordata) : m_sensorData(sensordata)
+HSmoke::HSmoke(const SensorData& sensordata) : m_sensorData(sensordata)
 {
 }
 
@@ -11,13 +11,13 @@ void HSmoke::Operate()
 {
 	while (true)
 	{
-		m_mtx.lock();
+		//m_mtx.lock();
 			if (m_IsTriggered)
 			{
 				SendPacket(m_sensorData);
 			}
 			ListenToControlPanel();
-		m_mtx.unlock();
+		//m_mtx.unlock();
 
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 	}

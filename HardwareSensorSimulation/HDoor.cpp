@@ -3,21 +3,22 @@
 
 std::mutex HDoor::m_mtx;
 
-HDoor::HDoor(SensorData& sensordata): m_sensorData(sensordata)
+HDoor::HDoor(const SensorData& sensordata): m_sensorData(sensordata)
 {
+
 }
 
 void HDoor::Operate()
 {
 	while (true)
 	{
-		m_mtx.lock();
+		//m_mtx.lock();
 		if (m_IsTriggered)
 		{
 			SendPacket(m_sensorData);
 		}
 		ListenToControlPanel();
-		m_mtx.unlock();
+		//m_mtx.unlock();
 
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 	}
@@ -36,7 +37,7 @@ void HDoor::SendPacket(SensorData& m_sensorData)
 	std::cout << "Sensor " << m_sensorData.macAddress << " SENT: Data from sensor" << m_sensorData.macAddress << std::endl;
 }
 
-void HDoor::ListenToControlPanel() 
+void HDoor::ListenToControlPanel()
 {
 	if (RFCommunication::HasMessage())
 	{

@@ -3,11 +3,13 @@
 
 class HDoor: public IHSensor {
 public:
-	HDoor(SensorData& sensordata);
+	HDoor(const SensorData& sensordata);
 
-	void Operate();
-	void SendPacket(SensorData& m_sensorData);
-	void ListenToControlPanel();
+	void Operate() override;
+	void SendPacket(SensorData& m_sensorData) override;
+	void ListenToControlPanel() override;
+
+	~HDoor() = default;
 
 private:
 	SensorData m_sensorData;
