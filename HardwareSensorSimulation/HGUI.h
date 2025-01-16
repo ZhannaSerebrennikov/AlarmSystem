@@ -2,14 +2,14 @@
 #include "IHSensor.h"
 
 
-class HGUI : public IHSensor
+class HGUI : public IHDevice
 {
 public:
 	HGUI(SensorData& sensordata);
 
-	void Operate();
-	void SendPacket(SensorData& m_sensorData);
-	void ListenToControlPanel();
+	void Operate() override;
+	void SendPacket(SensorData& m_sensorData) override;
+	void ListenToControlPanel() override;
 
 private:
 	SensorData m_sensorData;

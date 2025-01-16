@@ -11,13 +11,13 @@ void HGUI::Operate()
 {
 	while (true)
 	{
-		m_mtx.lock();
+		//m_mtx.lock();
 		if (m_IsTriggered)
 		{
 			SendPacket(m_sensorData);
 		}
 		ListenToControlPanel();
-		m_mtx.unlock();
+		//m_mtx.unlock();
 
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 	}
@@ -36,7 +36,7 @@ void HGUI::SendPacket(SensorData& m_sensorData)
 	std::cout << "Sensor " << m_sensorData.macAddress << " SENT: Data from sensor" << m_sensorData.macAddress << std::endl;*/
 }
 
-void HGUI::ListenToControlPanel()
+void HGUI::ListenToControlPanel() 
 {
 	if (RFCommunication::HasMessage())
 	{
@@ -45,9 +45,15 @@ void HGUI::ListenToControlPanel()
 			MessagePacket msg = RFCommunication::ReceivePacket();
 			std::string message = "Sensor " + std::to_string(msg.GetDstMacAddress()) + " RECEIVED data from Control Panel" + ".";
 			Logger::GetInstance().Log(message);
+			
+			std::vector<std::shared_ptr<IObserver>> tempDeviceData = msg.GetDeviceData();
+			for (auto it = tempDeviceData.begin(); it != tempDeviceData.end(); ++it) {
+				//std::shared_ptr<IObserver> observer = *it;
+				(*it)->DisplayAlarm();  // Assuming IObserver has a method DisplayAlarm
+			}
 
 			std::cout << "Sensor " << msg.GetDstMacAddress() << " RECEIVED data from Control Panel" << std::endl;
-
+			std::cout << "A " << msg.GetDstMacAddress() << " RECEIVED data from Control Panel" << std::endl;
 			SendPacket(m_sensorData);
 		}
 	}
