@@ -154,6 +154,7 @@
     <ClInclude Include="HSiren.h" />
     <ClInclude Include="HSmoke.h" />
     <ClInclude Include="HWindowBroken.h" />
+    <ClInclude Include="IHDevice.h" />
     <ClInclude Include="IHSensor.h" />
     <ClInclude Include="HMotion.h" />
   </ItemGroup>

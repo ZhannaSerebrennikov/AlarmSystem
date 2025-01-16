@@ -86,5 +86,6 @@
     <ClInclude Include="HGUI.h">
       <Filter>Devices</Filter>
     </ClInclude>
+    <ClInclude Include="IHDevice.h" />
   </ItemGroup>
 </Project>
