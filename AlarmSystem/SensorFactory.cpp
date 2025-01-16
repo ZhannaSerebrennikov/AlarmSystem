@@ -4,8 +4,10 @@
 #include "Siren.h"
 #include "Smoke.h"
 #include "WindowBroken.h"
+#include "GUI.h"
 
-std::unique_ptr<ISensor> SensorFactory::CreateObject(SensorData& sensorData) {
+
+std::unique_ptr<ISensor> SensorFactory::CreateSensorObject(SensorData& sensorData) {
 	if (sensorData.objType == ObjectTypeEnum::DOOR)
 	{
 		return std::make_unique<Door>(sensorData);
@@ -26,6 +28,13 @@ std::unique_ptr<ISensor> SensorFactory::CreateObject(SensorData& sensorData) {
 	{
 		return std::make_unique<Siren>(sensorData);
 	}
+	return nullptr;
+}
 
+std::unique_ptr<IDevice> SensorFactory::CreateDeviceObject(SensorData& sensorData) {
+	if (sensorData.objType == ObjectTypeEnum::GUI)
+	{
+		return std::make_unique<GUI>(sensorData);
+	}
 	return nullptr;
 }

@@ -16,33 +16,45 @@ ControlPanel::ControlPanel(): m_controlPanelMacAddress(0)
 
 	fileConn.ParseData(sensorDataFromFile);
 	
-	AddAllSensorsToControlPanel(sensorDataFromFile);
+	RegisterAllComponentsToControlPanel(sensorDataFromFile);
+
+	for (auto it = m_deviceCollection.begin(); it != m_deviceCollection.end(); ++it)
+	{
+		std::shared_ptr<GUI> guiPtr = std::dynamic_pointer_cast<GUI>(*it);
+		if (guiPtr)
+		{
+			m_gui = guiPtr;
+		}
+	}
+	//RegisterAllDevicesToControlPanel(sensorDataFromFile);
+	//m_deviceCollection.push_back(std::make_shared<GUI>());
+
+	//m_gui = std::make_shared<GUI>();
 }
 
-void ControlPanel::AddAllSensorsToControlPanel(std::vector<SensorData>& sensorDataFromFile)
+void ControlPanel::RegisterAllComponentsToControlPanel(std::vector<SensorData>& sensorDataFromFile)
 {
 	for (const SensorData& data : sensorDataFromFile)
 	{
-		AddSensorToControlPanel(data);
+		RegisterSensorToControlPanel(data);
+		RegisterDeviceToControlPanel(data);
 	}
 }
 
-void ControlPanel::AddSensorToControlPanel(SensorData sensordata)
+void ControlPanel::RegisterSensorToControlPanel(SensorData sensordata)
 {
-	std::shared_ptr<ISensor> temSensor = SensorFactory::CreateObject(sensordata);
-	m_sensorVector.push_back(temSensor);
+	std::shared_ptr<ISensor> tempSensor = SensorFactory::CreateSensorObject(sensordata);
+
+	if(tempSensor != nullptr)
+		m_sensorCollection.push_back(tempSensor);
 }
 
-void ControlPanel::AlarmToSensorConection()
+void ControlPanel::RegisterDeviceToControlPanel(SensorData sensordata)
 {
-	for (auto it = m_sensorVector.begin(); it != m_sensorVector.end(); ++it)
-	{
-		if ((*it)->GetSensorType() == ObjectTypeEnum::DOOR)
-		{
-			
-		}
+	std::shared_ptr<IDevice> tempDevice = SensorFactory::CreateDeviceObject(sensordata);
 
-	}
+	if (tempDevice != nullptr)
+		m_deviceCollection.push_back(tempDevice);
 }
 
 void ControlPanel::Start()
@@ -58,16 +70,17 @@ void ControlPanel::Monitoring()
 
 	int counter = 0;
 	MessagePacket packet;
-
 	//for (const auto& sensor : m_sensorVector)
-	for(auto it = m_sensorVector.begin(); it != m_sensorVector.end(); ++it)
+	for(auto it = m_sensorCollection.begin(); it != m_sensorCollection.end(); ++it)
 	{
 		counter = counter + 1;
 		//while (packet.GetWasSendTimesCounter() < 3 && communication was faild)
 		//{
 			SendMessage(packet, /*sensor*/(*it));
+			int mackadrr = RFCommunication::GetMessageDstMacAdress();
+			int recivepacketmakadrr = RFCommunication::GetMessageSrsMacAdress();
 
-			if (RFCommunication::GetMessageDstMacAdress() == 0)
+			if (RFCommunication::HasMessage() && RFCommunication::GetMessageDstMacAdress() == 0 && (*it)->GetSensorData().macAddress == RFCommunication::GetMessageSrsMacAdress())
 			{
 				(*it)->SetSensorData(RFCommunication::ReceivePacket().GetSensorData());
 
@@ -78,7 +91,7 @@ void ControlPanel::Monitoring()
 				std::cout << "Data from  sensor mackAddress " << (*it)->GetSensorData().macAddress << " was receved with a status "<< ObjectType::SensorStatusEnumToString((*it)->GetSensorData().sensorStatus) <<"." << std::endl;
 			}
 
-			std::this_thread::sleep_for(std::chrono::seconds(3));
+			std::this_thread::sleep_for(std::chrono::seconds(5));
 		//}
 		/*if (packet.GetWasSendTimesCounter() == 3)
 		{
@@ -86,27 +99,96 @@ void ControlPanel::Monitoring()
 			packet.ResetWasSendTimesCounter();
 		}*/
 	}
+	CheckForActiveAlarms();
+	for (auto it = m_deviceCollection.begin(); it != m_deviceCollection.end(); ++it)
+	{
+		SendMessage(packet, (*it));
+
+		std::this_thread::sleep_for(std::chrono::seconds(3));
+	}
 }
 
-void ControlPanel::SendMessage(MessagePacket& packet, std::shared_ptr<ISensor> sensor)
+void ControlPanel::SendMessage(MessagePacket& packet, std::shared_ptr<IDevice> device)
 {
 	packet.IncreaseWasSendTimesCounter();
+	if (auto sensor = std::dynamic_pointer_cast<ISensor>(device))
+	{
+		packet.CreatePacket(sensor->GetSensorData(), sensor->GetSensorData().macAddress);
 
-	packet.CreatePacket(sensor->GetSensorData(), sensor->GetSensorData().macAddress);
+		RFCommunication::SendPacket(packet);
+		//m_messageQueue.Enqueue(packet);
 
-	RFCommunication::SendPacket(packet);
-	//m_messageQueue.Enqueue(packet);
+		std::string message = "Control Panel Send Message to sensor " + std::to_string(sensor->GetSensorData().macAddress) + ".";
 
-	std::string message = "Control Panel Send Message to sensor " + std::to_string(sensor->GetSensorData().macAddress) + ".";
+		Logger::GetInstance().Log(message);
 
-	Logger::GetInstance().Log(message);
+		//std::cout << "Control Panel Send Message to sensor " << sensor->GetSensorData().macAddress << std::endl;
+	}
+	else
+	{
+		packet.CreatePacket(device->GetData(), device->GetSensorData().macAddress); // Just an example, you should define packet structure for devices
+		RFCommunication::SendPacket(packet);
 
-	std::cout << "Control Panel Send Message to sensor "<< sensor->GetSensorData().macAddress << std::endl;
+		std::string message = "Control Panel Send Message to device " + std::to_string(device->GetSensorData().macAddress) + ".";
+		Logger::GetInstance().Log(message);
+		std::cout << message << std::endl;
+	 }
 
-	std::this_thread::sleep_for(std::chrono::seconds(5));
+
+	//std::this_thread::sleep_for(std::chrono::seconds(5));
 }
 
 void ControlPanel::ReceiveMessage()
 {
 
+}
+
+void ControlPanel::UpdateGUIWithActiveAlarms()
+{
+	if(m_gui)
+	{
+		m_gui->SetActiveAlarms(m_activeAlarmCollection);
+	}
+}
+
+void ControlPanel::ResetActiveAlarmCollection()
+{
+	m_activeAlarmCollection.clear();
+}
+
+void ControlPanel::AddActiveAlarm(std::shared_ptr<IObserver> alarm)
+{
+	m_activeAlarmCollection.push_back(std::move(alarm));
+}
+
+void ControlPanel::RemoveActiveAlarm(std::shared_ptr<IObserver> alarm)
+{
+	auto it = std::remove(m_activeAlarmCollection.begin(), m_activeAlarmCollection.end(), alarm);
+	if (it != m_activeAlarmCollection.end())
+	{
+		m_activeAlarmCollection.erase(it, m_activeAlarmCollection.end());
+	}
+}
+
+void ControlPanel::CheckForActiveAlarms()
+{
+	ResetActiveAlarmCollection();
+
+	for (const auto& sensor : m_sensorCollection)
+	{
+		const auto& observers = sensor->GetObservers();
+		for (const auto& observer : observers)
+		{
+			if (observer->IsActive())
+			{
+				AddActiveAlarm(observer);
+			}
+			else
+			{
+				RemoveActiveAlarm(observer);
+			}
+		}
+	}
+
+	UpdateGUIWithActiveAlarms();
 }

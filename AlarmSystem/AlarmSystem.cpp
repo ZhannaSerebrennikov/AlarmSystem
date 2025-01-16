@@ -41,7 +41,7 @@ void AlarmSystem::ShowMenu()
 }
 
 
-void AlarmSystem::CreateHardwareDevices(std::vector<std::unique_ptr<IHSensor>>& hardwareSensorDevices, std::vector <std::thread>& threads)
+void AlarmSystem::CreateHardwareDevices(std::vector<std::unique_ptr<IHDevice>>& hardwareSensorDevices, std::vector <std::thread>& threads)
 {
 	std::vector<SensorData> enumSensorVector;
 

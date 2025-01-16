@@ -146,6 +146,7 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DoorOpenAlarm.cpp" />
     <ClCompile Include="FierAlarm.cpp" />
+    <ClCompile Include="GUI.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Motion.cpp" />
     <ClCompile Include="MotionAlarm.cpp" />
@@ -164,6 +165,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="ConnectedEvents.txt" />
     <Text Include="HardwareConSens.txt" />
     <Text Include="VirtualConnectedSensors.txt" />
   </ItemGroup>
@@ -174,6 +176,8 @@
     <ClInclude Include="Door.h" />
     <ClInclude Include="DoorOpenAlarm.h" />
     <ClInclude Include="FierAlarm.h" />
+    <ClInclude Include="GUI.h" />
+    <ClInclude Include="IDevice.h" />
     <ClInclude Include="ISensor.h" />
     <ClInclude Include="ISubject.h" />
     <ClInclude Include="IObserver.h" />
