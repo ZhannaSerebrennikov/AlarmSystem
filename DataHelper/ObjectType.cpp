@@ -10,7 +10,8 @@ ObjectTypeEnum ObjectType::ObjectTypeStringToEnum(const std::string& str)
 		{"Smoke", ObjectTypeEnum::SMOKE},
 		{"Siren", ObjectTypeEnum::SIREN},
 		{"WindowBroken", ObjectTypeEnum::WINDOWBROKEN},
-		{"Motion", ObjectTypeEnum::MOTION}
+		{"Motion", ObjectTypeEnum::MOTION},
+		{"GUI", ObjectTypeEnum::GUI}
 	};
 
 	auto it = objTypeMap.find(str);

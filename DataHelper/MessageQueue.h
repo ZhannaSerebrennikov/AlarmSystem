@@ -11,6 +11,7 @@ public:
 	MessagePacket Dequeue();
 	bool IsEmpty();
 	int GetQueueDstMacAddress();
+	int GetQueueSrsMacAddress();
 
 	MessageQueue() = default;
 	~MessageQueue() = default;
