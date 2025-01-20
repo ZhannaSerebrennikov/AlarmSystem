@@ -3,12 +3,13 @@
 
 class HSmoke : public IHSensor {
 public:
-	HSmoke(SensorData& sensordata);
+	HSmoke(const SensorData& sensordata);
 
-	void Operate();
-	void SendPacket(SensorData& m_sensorData);
-	void ListenToControlPanel();
+	void Operate() override;
+	void SendPacket(SensorData& m_sensorData) override;
+	void ListenToControlPanel() override;
 
+	~HSmoke() = default;
 private:
 	SensorData m_sensorData;
 	bool m_IsTriggered = false;

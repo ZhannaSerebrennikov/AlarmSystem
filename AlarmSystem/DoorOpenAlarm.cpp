@@ -15,16 +15,24 @@ DoorOpenAlarm::~DoorOpenAlarm()
 
 void DoorOpenAlarm::Update(SensorStatusEnum status)//OnNotify
 {
+	SetAlarmStatus(status);
+
 	if (status == SensorStatusEnum::ALARM)
 	{
 		std::string message = "Door Open Alarm!";
 
 		Logger::GetInstance().Log(message);
 		std::cout << "Door Open Alarm! " << std::endl;
+
 	}
 }
 
 void DoorOpenAlarm::SetAlarmStatus(SensorStatusEnum status)
 {
 	alarmStatus = status;
+}
+
+bool DoorOpenAlarm::IsActive()const
+{
+	return alarmStatus == SensorStatusEnum::ALARM;
 }

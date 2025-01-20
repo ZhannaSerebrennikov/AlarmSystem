@@ -1,5 +1,7 @@
 #pragma once
 #include "ObjectType.h"
+#include "../AlarmSystem/IObserver.h"
+#include <vector>
 
 class MessagePacket {
 public:
@@ -8,6 +10,12 @@ public:
 		m_sensorData = data;
 		m_dstMacAddress = dst;
 	}
+	void CreatePacket(const std::vector<std::shared_ptr<IObserver>> data, int dst)
+	{
+		m_deviceData = data;
+		m_dstMacAddress = dst;
+	}
+
 	int GetDstMacAddress()
 	{
 		return m_dstMacAddress;
@@ -16,6 +24,11 @@ public:
 	SensorData GetSensorData()
 	{
 		return m_sensorData;
+	}
+
+	std::vector<std::shared_ptr<IObserver>> GetDeviceData()
+	{
+		return m_deviceData;
 	}
 
 	void IncreaseWasSendTimesCounter()
@@ -34,8 +47,9 @@ public:
 	}
 	
 private:
-	int m_dstMacAddress;
+	int m_dstMacAddress = 0;
 	SensorData m_sensorData;
+	std::vector<std::shared_ptr<IObserver>> m_deviceData;
 
 	int m_wasSendTimesCounter = 0;
 };

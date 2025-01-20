@@ -3,11 +3,13 @@
 
 class HWindowBroken :public IHSensor {
 public:
-	HWindowBroken(SensorData& sensordata);
+	HWindowBroken(const SensorData& sensordata);
 
-	void Operate();
-	void SendPacket(SensorData& m_sensorData);
-	void ListenToControlPanel();
+	void Operate() override;
+	void SendPacket(SensorData& m_sensorData) override;
+	void ListenToControlPanel() override;
+
+	~HWindowBroken() = default;
 
 private:
 	SensorData m_sensorData;

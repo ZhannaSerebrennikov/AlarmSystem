@@ -3,11 +3,13 @@
 
 class HMotion : public IHSensor {
 public:
-	HMotion(SensorData& sensordata);
+	HMotion(const SensorData& sensordata);
 
-	void Operate();
-	void SendPacket(SensorData& m_sensorData);
-	void ListenToControlPanel();
+	void Operate() override;
+	void SendPacket(SensorData& m_sensorData) override;
+	void ListenToControlPanel() override;
+
+	~HMotion() = default;
 
 private:
 	SensorData m_sensorData;

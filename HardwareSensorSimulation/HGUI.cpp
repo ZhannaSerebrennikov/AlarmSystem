@@ -1,14 +1,13 @@
 #include <iostream>
-#include "HDoor.h"
+#include "HGUI.h"
 
-std::mutex HDoor::m_mtx;
+std::mutex HGUI::m_mtx;
 
-HDoor::HDoor(const SensorData& sensordata): m_sensorData(sensordata)
+HGUI::HGUI(SensorData& sensordata) : m_sensorData(sensordata)
 {
-
 }
 
-void HDoor::Operate()
+void HGUI::Operate()
 {
 	while (true)
 	{
@@ -24,20 +23,20 @@ void HDoor::Operate()
 	}
 }
 
-void HDoor::SendPacket(SensorData& m_sensorData)
+void HGUI::SendPacket(SensorData& m_sensorData)
 {
-	MessagePacket msg;
+	/*MessagePacket msg;
 
 	msg.CreatePacket(m_sensorData, 0);
 	RFCommunication::SendPacket(msg);
 
-	std::string message = "Sensor " + std::to_string(m_sensorData.macAddress) + " SENT: Data from sensor"+ std::to_string(m_sensorData.macAddress)+ ".";
+	std::string message = "Sensor " + std::to_string(m_sensorData.macAddress) + " SENT: Data from sensor" + std::to_string(m_sensorData.macAddress) + ".";
 	Logger::GetInstance().Log(message);
 
-	std::cout << "Sensor " << m_sensorData.macAddress << " SENT: Data from sensor" << m_sensorData.macAddress << std::endl;
+	std::cout << "Sensor " << m_sensorData.macAddress << " SENT: Data from sensor" << m_sensorData.macAddress << std::endl;*/
 }
 
-void HDoor::ListenToControlPanel()
+void HGUI::ListenToControlPanel() 
 {
 	if (RFCommunication::HasMessage())
 	{
@@ -46,18 +45,24 @@ void HDoor::ListenToControlPanel()
 			MessagePacket msg = RFCommunication::ReceivePacket();
 			std::string message = "Sensor " + std::to_string(msg.GetDstMacAddress()) + " RECEIVED data from Control Panel" + ".";
 			Logger::GetInstance().Log(message);
+			
+			std::vector<std::shared_ptr<IObserver>> tempDeviceData = msg.GetDeviceData();
+			for (auto it = tempDeviceData.begin(); it != tempDeviceData.end(); ++it) {
+				//std::shared_ptr<IObserver> observer = *it;
+				(*it)->DisplayAlarm();  // Assuming IObserver has a method DisplayAlarm
+			}
 
 			std::cout << "Sensor " << msg.GetDstMacAddress() << " RECEIVED data from Control Panel" << std::endl;
-
+			std::cout << "A " << msg.GetDstMacAddress() << " RECEIVED data from Control Panel" << std::endl;
 			SendPacket(m_sensorData);
 		}
 	}
 }
 
 /*void HDoor::ListenToControlPanel() {
-	
+
 	if (RFCommunication::ReceivePacket().GetDstMacAddress() == m_sensorData.macAddress)
-	{	
+	{
 		SensorData temp = RFCommunication::ReceivePacket().GetSensorData();
 
 		if (m_sensorData.sensorStatus == SensorStatusEnum::OK)

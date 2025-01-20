@@ -9,8 +9,11 @@ public:
 	explicit WindowBrokenAlarm(ISensor* sensor);
 	~WindowBrokenAlarm();
 	void Update(SensorStatusEnum status);
+	bool IsActive() const override;
 	void SetAlarmStatus(SensorStatusEnum status);
-
+	void DisplayAlarm() const override {
+		std::cout << "Windows Broken Alarm triggered! Sensor MacAdress " << m_sensor->GetSensorData().macAddress << std::endl;
+	}
 
 private:
 	ISensor* m_sensor;

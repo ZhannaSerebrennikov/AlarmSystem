@@ -26,3 +26,8 @@ int MessageQueue::GetQueueDstMacAddress()
 {
 	return m_queue.front().GetDstMacAddress();
 }
+
+int MessageQueue::GetQueueSrsMacAddress()
+{
+	return m_queue.front().GetSensorData().macAddress;
+}

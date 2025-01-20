@@ -56,3 +56,8 @@ void Siren::NotifyObservers()
 		observer->Update(m_sensorData.sensorStatus);
 	}
 }
+
+
+const std::vector<std::shared_ptr<IObserver>>& Siren::GetObservers() const {
+	return m_observers;
+}

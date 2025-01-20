@@ -6,10 +6,10 @@
 Door::Door(SensorData sensorData) : m_sensorData(sensorData)
 {
 	std::shared_ptr<IObserver> doorOpenAlarm = std::make_shared<DoorOpenAlarm>(this);
-	std::shared_ptr<IObserver> bulglarAlarm = std::make_shared<BulglarAlarm>(this);
-
 	this->AddObserver(doorOpenAlarm);
-	this->AddObserver(bulglarAlarm);
+
+	std::shared_ptr<IObserver> bulglaryAlarm = std::make_shared<BulglarAlarm>(this);
+	this->AddObserver(bulglaryAlarm);
 }
 
 SensorData Door::GetSensorData() const
@@ -58,4 +58,8 @@ void Door::NotifyObservers()
 	{
 		(*it)->Update(m_sensorData.sensorStatus);
 	}
+}
+
+const std::vector<std::shared_ptr<IObserver>>& Door::GetObservers() const {
+	return m_observers;
 }

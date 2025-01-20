@@ -14,6 +14,8 @@ WindowBrokenAlarm::~WindowBrokenAlarm()
 
 void WindowBrokenAlarm::Update(SensorStatusEnum status)
 {
+	SetAlarmStatus(status);
+
 	if (status == SensorStatusEnum::ALARM)
 	{
 		std::string message = "Window Broken! ";
@@ -26,4 +28,9 @@ void WindowBrokenAlarm::Update(SensorStatusEnum status)
 void WindowBrokenAlarm::SetAlarmStatus(SensorStatusEnum status)
 {
 	m_alarmstatus = status;
+}
+
+bool WindowBrokenAlarm::IsActive() const
+{
+	return m_alarmstatus == SensorStatusEnum::ALARM;
 }

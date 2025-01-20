@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="HGUI.cpp" />
     <ClCompile Include="HardwareSensorsFactory.cpp" />
     <ClCompile Include="HDoor.cpp" />
     <ClCompile Include="HSiren.cpp" />
@@ -147,11 +148,13 @@
     <ClCompile Include="HMotion.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="HGUI.h" />
     <ClInclude Include="HardwareSensorsFactory.h" />
     <ClInclude Include="HDoor.h" />
     <ClInclude Include="HSiren.h" />
     <ClInclude Include="HSmoke.h" />
     <ClInclude Include="HWindowBroken.h" />
+    <ClInclude Include="IHDevice.h" />
     <ClInclude Include="IHSensor.h" />
     <ClInclude Include="HMotion.h" />
   </ItemGroup>

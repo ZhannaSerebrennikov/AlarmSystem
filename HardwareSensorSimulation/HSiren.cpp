@@ -3,7 +3,7 @@
 
 std::mutex HSiren::m_mtx;
 
-HSiren::HSiren(SensorData& sensordata) : m_sensorData(sensordata)
+HSiren::HSiren(const SensorData& sensordata) : m_sensorData(sensordata)
 {
 }
 
@@ -11,13 +11,13 @@ void HSiren::Operate()
 {
 	while (true)
 	{
-		m_mtx.lock();
+		//m_mtx.lock();
 			if (m_IsTriggered)
 			{
 				SendPacket(m_sensorData);
 			}
 			ListenToControlPanel();
-		m_mtx.unlock();
+		//m_mtx.unlock();
 
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 	}

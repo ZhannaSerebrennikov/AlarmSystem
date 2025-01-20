@@ -11,6 +11,7 @@ public:
 	static MessagePacket ReceivePacket();
 	static bool HasMessage();
 	static int GetMessageDstMacAdress();
+	static int GetMessageSrsMacAdress();
 
 private:
 	static MessageQueue m_messageQueue;

@@ -55,3 +55,7 @@ void Smoke::NotifyObservers()
 		observer->Update(m_sensorData.sensorStatus);
 	}
 }
+
+const std::vector<std::shared_ptr<IObserver>>& Smoke::GetObservers() const {
+	return m_observers;
+}

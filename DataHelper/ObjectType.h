@@ -6,7 +6,8 @@ enum class ObjectTypeEnum {
 	SMOKE,
 	SIREN,
 	WINDOWBROKEN,
-	MOTION
+	MOTION,
+	GUI
 };
 
 enum class SensorStatusEnum {

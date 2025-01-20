@@ -28,3 +28,8 @@ int RFCommunication::GetMessageDstMacAdress()
 {
 	return m_messageQueue.GetQueueDstMacAddress();
 }
+
+int RFCommunication::GetMessageSrsMacAdress()
+{
+	return m_messageQueue.GetQueueSrsMacAddress();
+}

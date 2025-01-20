@@ -64,6 +64,12 @@
     <Filter Include="Alarm\MotionAlarm">
       <UniqueIdentifier>{8d0d31cb-35fb-4830-921d-6aa45015507a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Devices">
+      <UniqueIdentifier>{b9f4db71-dc77-46cd-aacd-ab7fdf8be59a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Devices\GUI">
+      <UniqueIdentifier>{1a688bc2-2be0-41bc-b378-0887b531d376}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -111,12 +117,18 @@
     <ClCompile Include="MotionAlarm.cpp">
       <Filter>Alarm\MotionAlarm</Filter>
     </ClCompile>
+    <ClCompile Include="GUI.cpp">
+      <Filter>Devices\GUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="HardwareConSens.txt">
       <Filter>Resource Files</Filter>
     </Text>
     <Text Include="VirtualConnectedSensors.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="ConnectedEvents.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
@@ -171,6 +183,12 @@
     </ClInclude>
     <ClInclude Include="MotionAlarm.h">
       <Filter>Alarm\MotionAlarm</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>Devices\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="IDevice.h">
+      <Filter>Devices</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

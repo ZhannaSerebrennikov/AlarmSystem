@@ -1,20 +1,19 @@
 #pragma once
 #include "IHSensor.h"
 
-class HDoor: public IHSensor {
+
+class HGUI : public IHDevice
+{
 public:
-	HDoor(const SensorData& sensordata);
+	HGUI(SensorData& sensordata);
 
 	void Operate() override;
 	void SendPacket(SensorData& m_sensorData) override;
 	void ListenToControlPanel() override;
-
-	~HDoor() = default;
 
 private:
 	SensorData m_sensorData;
 	bool m_IsTriggered = false;
 	//MessageQueue& m_messageQueue;
 	static std::mutex m_mtx;
-	
 };

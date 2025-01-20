@@ -34,6 +34,9 @@
     <Filter Include="Sensors\Motion">
       <UniqueIdentifier>{8c7cbb3b-3d9e-4dca-99e6-69b1301b2f3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Devices">
+      <UniqueIdentifier>{e495b794-193f-4008-bd81-b2b2bc0ae635}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HardwareSensorsFactory.cpp">
@@ -53,6 +56,9 @@
     </ClCompile>
     <ClCompile Include="HMotion.cpp">
       <Filter>Sensors\Motion</Filter>
+    </ClCompile>
+    <ClCompile Include="HGUI.cpp">
+      <Filter>Devices</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -77,5 +83,9 @@
     <ClInclude Include="HMotion.h">
       <Filter>Sensors\Motion</Filter>
     </ClInclude>
+    <ClInclude Include="HGUI.h">
+      <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="IHDevice.h" />
   </ItemGroup>
 </Project>
