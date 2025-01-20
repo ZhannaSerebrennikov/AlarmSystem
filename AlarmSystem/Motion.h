@@ -8,7 +8,7 @@
 
 class Motion : public ISensor {
 public:
-	Motion(SensorData);
+	Motion(SensorData sensorData);
 	SensorData GetSensorData() const override;
 	void SetSensorData(SensorData data) override;
 

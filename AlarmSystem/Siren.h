@@ -8,7 +8,7 @@
 
 class Siren : public ISensor {
 public:
-	Siren(SensorData);
+	Siren(SensorData sensorData);
 	SensorData GetSensorData() const override;
 	void SetSensorData(SensorData data) override;
 

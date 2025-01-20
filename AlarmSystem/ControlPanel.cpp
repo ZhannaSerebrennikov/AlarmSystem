@@ -36,7 +36,7 @@ ControlPanel::ControlPanel(const ControlPanel& controlPanel) : m_controlPanelMac
 {
 	for (const auto& sensor : controlPanel.m_sensorCollection)
 	{
-		m_sensorCollection.push_back(std::make_shared<ISensor>(&sensor));//deep copy for the m_sensorVector for creating new shared pointers for each object
+		//m_sensorCollection.push_back(std::make_shared<ISensor>(&sensor));//deep copy for the m_sensorVector for creating new shared pointers for each object
 	}
 }
 
@@ -52,7 +52,7 @@ ControlPanel& ControlPanel::operator=(const ControlPanel controlPanel)
 
 	for (const auto& sensor : m_sensorCollection) //deep copy
 	{
-		m_sensorCollection.push_back(std::make_shared<ISensor>(*sensor));
+		//m_sensorCollection.push_back(std::make_shared<ISensor>(*sensor));
 	}
 
 	return *this;

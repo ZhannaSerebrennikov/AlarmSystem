@@ -27,13 +27,8 @@ private:
 	std::vector<std::shared_ptr<ISensor>> m_sensorCollection;
 	std::vector<std::shared_ptr<IDevice>> m_deviceCollection;
 	std::vector<std::shared_ptr<IObserver>> m_activeAlarmCollection;
-	//MessageQueue& m_messageQueue;
-<<<<<<< HEAD
-	//std::atomic<bool> stop;
-=======
 	std::atomic<bool> stop;
 	std::shared_ptr<GUI> m_gui;
->>>>>>> feature-GUI
 
 	void RegisterSensorToControlPanel(SensorData sensordata);
 	void RegisterDeviceToControlPanel(SensorData sensordata);

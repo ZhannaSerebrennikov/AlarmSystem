@@ -60,6 +60,7 @@ void Door::NotifyObservers()
 	}
 }
 
-const std::vector<std::shared_ptr<IObserver>>& Door::GetObservers() const {
+const std::vector<std::shared_ptr<IObserver>>& Door::GetObservers() const
+{
 	return m_observers;
 }
