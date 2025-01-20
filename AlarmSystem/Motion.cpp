@@ -1,11 +1,14 @@
 #include "Motion.h"
 #include "MotionAlarm.h"
+#include "BulglarAlarm.h"
 
 Motion::Motion(SensorData sensorData) :m_sensorData(sensorData)
 {
 	std::shared_ptr<IObserver> observer = std::make_shared<MotionAlarm>(this);
-
 	this->AddObserver(observer);
+
+	std::shared_ptr<IObserver> bulglaryAlarm = std::make_shared<BulglarAlarm>(this);
+	this->AddObserver(bulglaryAlarm);
 }
 
 SensorData Motion::GetSensorData() const

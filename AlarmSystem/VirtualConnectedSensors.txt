@@ -1,4 +1,5 @@
 Door:11:Ok
+Motion:22:Ok
 Door:33:Ok
 Smoke:44:Ok
 WindowBroken:66:Ok

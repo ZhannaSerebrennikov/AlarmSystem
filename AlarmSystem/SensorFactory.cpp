@@ -1,9 +1,9 @@
-
 #include "SensorFactory.h"
 #include "Door.h"
 #include "Siren.h"
 #include "Smoke.h"
 #include "WindowBroken.h"
+#include "Motion.h"
 #include "GUI.h"
 
 
@@ -26,7 +26,7 @@ std::unique_ptr<ISensor> SensorFactory::CreateSensorObject(SensorData& sensorDat
 	}
 	else if (sensorData.objType == ObjectTypeEnum::MOTION)
 	{
-		return std::make_unique<Siren>(sensorData);
+		return std::make_unique<Motion>(sensorData);
 	}
 	return nullptr;
 }

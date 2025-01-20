@@ -6,10 +6,7 @@
 WindowBroken::WindowBroken(SensorData sensorData) : m_sensorData(sensorData)
 {
 	std::shared_ptr<IObserver> windowsBrokenAlarm = std::make_shared<WindowBrokenAlarm>(this);
-	std::shared_ptr<IObserver> bulglarAlarm = std::make_shared<BulglarAlarm>(this);
-
 	this->AddObserver(windowsBrokenAlarm);
-	this->AddObserver(bulglarAlarm);
 }
 
 SensorData WindowBroken::GetSensorData() const
