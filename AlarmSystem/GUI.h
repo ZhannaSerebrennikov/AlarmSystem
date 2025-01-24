@@ -14,7 +14,10 @@ private:
 public:
 	GUI(SensorData sensorData);
 	SensorData GetSensorData() const override;
+	void SetSensorData(SensorData data);
 	void SetActiveAlarms(const std::vector<std::shared_ptr<IObserver>>& activeAlarms);
 	void RemoveActiveAlarm(std::string alarmToRemove);
 	const std::vector<std::shared_ptr<IObserver>> GetData();
+	void SetStatus(const SensorStatusEnum& newStatus);
+	void SetUserInput(int _userInput);
 };

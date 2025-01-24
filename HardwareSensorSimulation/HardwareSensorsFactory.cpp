@@ -5,6 +5,7 @@
 #include "HWindowBroken.h"
 #include "HMotion.h"
 #include "HGUI.h"
+#include "HKeyPad.h"
 
 std::unique_ptr<IHDevice> HardwareSensorsFactory::CreateObject(SensorData& sensorData)
 {
@@ -31,6 +32,10 @@ std::unique_ptr<IHDevice> HardwareSensorsFactory::CreateObject(SensorData& senso
 	else if (sensorData.objType == ObjectTypeEnum::GUI)
 	{
 		return std::make_unique<HGUI>(sensorData);
+	}
+	else if (sensorData.objType == ObjectTypeEnum::KEYPAD)
+	{
+		return std::make_unique<HKeyPad>(sensorData);
 	}
 
 	return nullptr;

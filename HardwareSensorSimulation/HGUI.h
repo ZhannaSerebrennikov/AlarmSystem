@@ -1,5 +1,5 @@
 #pragma once
-#include "IHSensor.h"
+#include "IHDevice.h"
 
 
 class HGUI : public IHDevice
@@ -10,6 +10,7 @@ public:
 	void Operate() override;
 	void SendPacket(SensorData& m_sensorData) override;
 	void ListenToControlPanel() override;
+	void ShowMenu();
 
 private:
 	SensorData m_sensorData;

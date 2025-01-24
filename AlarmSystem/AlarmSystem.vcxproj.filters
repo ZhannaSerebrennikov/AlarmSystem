@@ -70,6 +70,9 @@
     <Filter Include="Devices\GUI">
       <UniqueIdentifier>{1a688bc2-2be0-41bc-b378-0887b531d376}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Devices\KeyPad">
+      <UniqueIdentifier>{66fe9cb9-60c1-4c5e-9389-f21724912122}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -119,6 +122,9 @@
     </ClCompile>
     <ClCompile Include="GUI.cpp">
       <Filter>Devices\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="KeyPad.cpp">
+      <Filter>Devices\KeyPad</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +195,9 @@
     </ClInclude>
     <ClInclude Include="IDevice.h">
       <Filter>Devices</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyPad.h">
+      <Filter>Devices\KeyPad</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

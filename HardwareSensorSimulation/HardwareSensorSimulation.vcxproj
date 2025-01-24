@@ -142,6 +142,7 @@
     <ClCompile Include="HGUI.cpp" />
     <ClCompile Include="HardwareSensorsFactory.cpp" />
     <ClCompile Include="HDoor.cpp" />
+    <ClCompile Include="HKeyPad.cpp" />
     <ClCompile Include="HSiren.cpp" />
     <ClCompile Include="HSmoke.cpp" />
     <ClCompile Include="HWindowBroken.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="HGUI.h" />
     <ClInclude Include="HardwareSensorsFactory.h" />
     <ClInclude Include="HDoor.h" />
+    <ClInclude Include="HKeyPad.h" />
     <ClInclude Include="HSiren.h" />
     <ClInclude Include="HSmoke.h" />
     <ClInclude Include="HWindowBroken.h" />

@@ -147,6 +147,7 @@
     <ClCompile Include="DoorOpenAlarm.cpp" />
     <ClCompile Include="FierAlarm.cpp" />
     <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="KeyPad.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="Motion.cpp" />
     <ClCompile Include="MotionAlarm.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="ISensor.h" />
     <ClInclude Include="ISubject.h" />
     <ClInclude Include="IObserver.h" />
+    <ClInclude Include="KeyPad.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="Motion.h" />
     <ClInclude Include="MotionAlarm.h" />
