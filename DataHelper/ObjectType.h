@@ -7,7 +7,8 @@ enum class ObjectTypeEnum {
 	SIREN,
 	WINDOWBROKEN,
 	MOTION,
-	GUI
+	GUI,
+	KEYPAD
 };
 
 enum class SensorStatusEnum {
@@ -20,6 +21,7 @@ struct SensorData {
 	ObjectTypeEnum objType;
 	SensorStatusEnum sensorStatus;
 	int macAddress;
+	int inputOutput;
 };
 
 

@@ -10,10 +10,11 @@ public:
 		m_sensorData = data;
 		m_dstMacAddress = dst;
 	}
-	void CreatePacket(const std::vector<std::shared_ptr<IObserver>> data, int dst)
+	void CreatePacket(const std::vector<std::shared_ptr<IObserver>> _activeAlarms, const SensorData& data, int dst)
 	{
-		m_deviceData = data;
+		m_ActiveAlarms = _activeAlarms;
 		m_dstMacAddress = dst;
+		m_sensorData = data;
 	}
 
 	int GetDstMacAddress()
@@ -28,7 +29,7 @@ public:
 
 	std::vector<std::shared_ptr<IObserver>> GetDeviceData()
 	{
-		return m_deviceData;
+		return m_ActiveAlarms;
 	}
 
 	void IncreaseWasSendTimesCounter()
@@ -49,7 +50,7 @@ public:
 private:
 	int m_dstMacAddress = 0;
 	SensorData m_sensorData;
-	std::vector<std::shared_ptr<IObserver>> m_deviceData;
+	std::vector<std::shared_ptr<IObserver>> m_ActiveAlarms;
 
 	int m_wasSendTimesCounter = 0;
 };
