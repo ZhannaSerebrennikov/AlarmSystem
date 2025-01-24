@@ -93,42 +93,33 @@ void ControlPanel::Start()
 
 void ControlPanel::Monitoring()
 {
-
-	int counter = 0;
 	MessagePacket packet;
-	//for (const auto& sensor : m_sensorVector)
+
 	for(auto it = m_sensorCollection.begin(); it != m_sensorCollection.end(); ++it)
 	{
-		counter = counter + 1;
-		//while (packet.GetWasSendTimesCounter() < 3 && communication was faild)
-		//{
-			SendMessage(packet, /*sensor*/(*it));
-			int mackadrr = RFCommunication::GetMessageDstMacAdress();
-			int recivepacketmakadrr = RFCommunication::GetMessageSrsMacAdress();
+		SendMessage(packet, (*it));
 
-			if (RFCommunication::HasMessage() && RFCommunication::GetMessageDstMacAdress() == 0 && (*it)->GetSensorData().macAddress == RFCommunication::GetMessageSrsMacAdress())
-			{
-				(*it)->SetSensorData(RFCommunication::ReceivePacket().GetSensorData());
-
-				std::string message = "Data from  sensor mackAddress " + std::to_string((*it)->GetSensorData().macAddress) + " was receved with a status " + ObjectType::SensorStatusEnumToString((*it)->GetSensorData().sensorStatus) + ".";
-
-				Logger::GetInstance().Log(message);
-
-				std::cout << "Data from  sensor mackAddress " << (*it)->GetSensorData().macAddress << " was receved with a status "<< ObjectType::SensorStatusEnumToString((*it)->GetSensorData().sensorStatus) <<"." << std::endl;
-			}
-
-			std::this_thread::sleep_for(std::chrono::seconds(5));
-		//}
-		/*if (packet.GetWasSendTimesCounter() == 3)
+		if (RFCommunication::HasMessage() && RFCommunication::GetMessageDstMacAdress() == 0 && (*it)->GetSensorData().macAddress == RFCommunication::GetMessageSrsMacAdress())
 		{
-			std::cout << "Sensor mackAddress " << (*it)->GetSensorData().macAddress << " not answering" << std::endl;
-			packet.ResetWasSendTimesCounter();
-		}*/
+			ReceiveMessage((*it));
+		}
+		std::this_thread::sleep_for(std::chrono::seconds(5));
 	}
 	CheckForActiveAlarms();
 	for (auto it = m_deviceCollection.begin(); it != m_deviceCollection.end(); ++it)
 	{
-		SendMessage(packet, (*it));
+		if (std::dynamic_pointer_cast<GUI>(*it))
+		{
+			SendMessage(packet, (*it));
+		}
+		else if (std::dynamic_pointer_cast<KeyPad>(*it))
+		{
+			if (RFCommunication::HasMessage() && RFCommunication::GetMessageDstMacAdress() == 0 && (*it)->GetSensorData().macAddress == RFCommunication::GetMessageSrsMacAdress())
+			{
+				ReceiveMessage((*it));
+				m_gui->SetUserInput((*it)->GetSensorData().inputOutput);
+			}
+		}
 
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 	}
@@ -152,21 +143,22 @@ void ControlPanel::SendMessage(MessagePacket& packet, std::shared_ptr<IDevice> d
 	}
 	else
 	{
-		packet.CreatePacket(device->GetData(), device->GetSensorData().macAddress); // Just an example, you should define packet structure for devices
+		packet.CreatePacket(device->GetData(), device->GetSensorData(), device->GetSensorData().macAddress); // Just an example, you should define packet structure for devices
 		RFCommunication::SendPacket(packet);
 
 		std::string message = "Control Panel Send Message to device " + std::to_string(device->GetSensorData().macAddress) + ".";
 		Logger::GetInstance().Log(message);
-		std::cout << message << std::endl;
 	 }
-
-
 	//std::this_thread::sleep_for(std::chrono::seconds(5));
 }
 
-void ControlPanel::ReceiveMessage()
+void ControlPanel::ReceiveMessage(std::shared_ptr<IDevice> sensor)
 {
+	sensor->SetSensorData(RFCommunication::ReceivePacket().GetSensorData());
 
+	std::string message = "Data from  sensor mackAddress " + std::to_string(sensor->GetSensorData().macAddress) + " was receved with a status " + ObjectType::SensorStatusEnumToString(sensor->GetSensorData().sensorStatus) + ".";
+
+	Logger::GetInstance().Log(message);
 }
 
 void ControlPanel::UpdateGUIWithActiveAlarms()

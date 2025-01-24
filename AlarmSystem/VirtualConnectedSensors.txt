@@ -4,3 +4,4 @@ Door:33:Ok
 Smoke:44:Ok
 WindowBroken:66:Ok
 GUI:77:Ok
+KEYPAD:88:Ok

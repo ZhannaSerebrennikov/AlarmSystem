@@ -4,7 +4,9 @@
 AlarmSystem::AlarmSystem()
 {
 	Logger::GetInstance().OpenLogFile("LogFile.txt");
-	
+	CreateHardwareDevices(v_hardwareSensorsDevices, v_threads);
+	checForGUIdevice();
+	checkForKeyPadDevice();
 }
 
 AlarmSystem::~AlarmSystem()
@@ -14,7 +16,6 @@ AlarmSystem::~AlarmSystem()
 
 void AlarmSystem::Run()
 {
-	CreateHardwareDevices(v_hardwareSensors, v_threads);
 	for (auto& thread : v_threads) {
 
 		thread.detach();
@@ -23,19 +24,30 @@ void AlarmSystem::Run()
 	std::thread cpThread(&ControlPanel::Start, &mainPanel);
 	cpThread.detach();
 
-	std::thread guiThread(&AlarmSystem::ShowMenu, this);
+	std::thread guiThread(&AlarmSystem::Menu, this);
 	guiThread.join();
 }
 
-void AlarmSystem::ShowMenu()
+void AlarmSystem::Menu()
 {
 	int choice = 0;
 	while(true)
 	{ 
-		std::cout << "\n 1. Trigger Sensor\n 2. Remove Alarm\n 3. Display All Alarms\n 4. Display Conected Sensors\n 5.  Exit" << std::endl;
-		std::cout << "Enter choice: ";
-		std::cin >> choice;
-
+		if (m_hgui != nullptr) {
+			m_hgui->ShowMenu();
+		}
+		else {
+			std::cerr << "Error: Gui not initialized!" << std::endl;
+		}
+		
+ 		if(m_hkeypad != nullptr)
+		{
+			m_hkeypad->GetUserInput();
+		}
+		else {
+			std::cerr << "Error: KeyPad not initialized!" << std::endl;
+		}
+		
 		std::this_thread::sleep_for(std::chrono::seconds(3));
 	}
 }
@@ -57,6 +69,29 @@ void AlarmSystem::CreateHardwareDevices(std::vector<std::unique_ptr<IHDevice>>& 
 		//threads.back().join();
 	}
 
+}
+void AlarmSystem::checForGUIdevice()
+{
+	for (auto& sensor : v_hardwareSensorsDevices)
+	{
+		if (auto* gui = dynamic_cast<HGUI*>(sensor.get()))
+		{
+			m_hgui = gui;
+			break;
+		}
+	}
+}
+
+void AlarmSystem::checkForKeyPadDevice()
+{
+	for (auto& sensor : v_hardwareSensorsDevices)
+	{
+		if (auto* keypad = dynamic_cast<HKeyPad*>(sensor.get()))
+		{
+			m_hkeypad = keypad;
+			break;
+		}
+	}
 }
 /*void AlarmSystem::RunSimulation()
 {

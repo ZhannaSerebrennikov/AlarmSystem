@@ -7,6 +7,7 @@
 #include "../DataHelper/MessageQueue.h"
 #include "Logger.h"
 #include "GUI.h"
+#include "KeyPad.h"
 
 
 class ControlPanel {
@@ -20,7 +21,7 @@ public:
 	//void SendActiveAlarmsToGUI();
 	void Start();
 	void SendMessage(MessagePacket& packet, std::shared_ptr<IDevice> device);
-	void ReceiveMessage();
+	void ReceiveMessage(std::shared_ptr<IDevice> sensor);
 
 private:
 	int m_controlPanelMacAddress;

@@ -5,6 +5,7 @@
 #include "WindowBroken.h"
 #include "Motion.h"
 #include "GUI.h"
+#include "KeyPad.h"
 
 
 std::unique_ptr<ISensor> SensorFactory::CreateSensorObject(SensorData& sensorData) {
@@ -28,6 +29,7 @@ std::unique_ptr<ISensor> SensorFactory::CreateSensorObject(SensorData& sensorDat
 	{
 		return std::make_unique<Motion>(sensorData);
 	}
+
 	return nullptr;
 }
 
@@ -35,6 +37,10 @@ std::unique_ptr<IDevice> SensorFactory::CreateDeviceObject(SensorData& sensorDat
 	if (sensorData.objType == ObjectTypeEnum::GUI)
 	{
 		return std::make_unique<GUI>(sensorData);
+	}
+	if (sensorData.objType == ObjectTypeEnum::KEYPAD)
+	{
+		return std::make_unique<KeyPad>(sensorData);
 	}
 	return nullptr;
 }
