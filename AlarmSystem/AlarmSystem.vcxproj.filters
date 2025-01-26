@@ -73,6 +73,18 @@
     <Filter Include="Devices\KeyPad">
       <UniqueIdentifier>{66fe9cb9-60c1-4c5e-9389-f21724912122}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AlarmSystemState">
+      <UniqueIdentifier>{5f676394-3de6-45b2-8c72-29cda013de97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AlarmSystemState\ArmState">
+      <UniqueIdentifier>{a43b7a12-a533-418a-a40c-6fc63d618abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AlarmSystemState\DisarmState">
+      <UniqueIdentifier>{d273ac42-35b1-4b32-8774-0b234b431f1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AlarmSystemState\StayArmedState">
+      <UniqueIdentifier>{5a321c2f-fa4f-48ab-a986-f574baaa4525}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -125,6 +137,15 @@
     </ClCompile>
     <ClCompile Include="KeyPad.cpp">
       <Filter>Devices\KeyPad</Filter>
+    </ClCompile>
+    <ClCompile Include="ArmState.cpp">
+      <Filter>AlarmSystemState\ArmState</Filter>
+    </ClCompile>
+    <ClCompile Include="DisarmState.cpp">
+      <Filter>AlarmSystemState\DisarmState</Filter>
+    </ClCompile>
+    <ClCompile Include="StayArmedState.cpp">
+      <Filter>AlarmSystemState\StayArmedState</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +219,18 @@
     </ClInclude>
     <ClInclude Include="KeyPad.h">
       <Filter>Devices\KeyPad</Filter>
+    </ClInclude>
+    <ClInclude Include="AlarmSystemState.h">
+      <Filter>AlarmSystemState</Filter>
+    </ClInclude>
+    <ClInclude Include="ArmState.h">
+      <Filter>AlarmSystemState\ArmState</Filter>
+    </ClInclude>
+    <ClInclude Include="DisarmState.h">
+      <Filter>AlarmSystemState\DisarmState</Filter>
+    </ClInclude>
+    <ClInclude Include="StayArmedState.h">
+      <Filter>AlarmSystemState\StayArmedState</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -141,8 +141,10 @@
   <ItemGroup>
     <ClCompile Include="..\main.cpp" />
     <ClCompile Include="AlarmSystem.cpp" />
+    <ClCompile Include="ArmState.cpp" />
     <ClCompile Include="BulglarAlarm.cpp" />
     <ClCompile Include="ControlPanel.cpp" />
+    <ClCompile Include="DisarmState.cpp" />
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="DoorOpenAlarm.cpp" />
     <ClCompile Include="FierAlarm.cpp" />
@@ -154,6 +156,7 @@
     <ClCompile Include="SensorFactory.cpp" />
     <ClCompile Include="Siren.cpp" />
     <ClCompile Include="Smoke.cpp" />
+    <ClCompile Include="StayArmedState.cpp" />
     <ClCompile Include="WindowBroken.cpp" />
     <ClCompile Include="WindowBrokenAlarm.cpp" />
   </ItemGroup>
@@ -172,8 +175,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlarmSystem.h" />
+    <ClInclude Include="AlarmSystemState.h" />
+    <ClInclude Include="ArmState.h" />
     <ClInclude Include="BulglarAlarm.h" />
     <ClInclude Include="ControlPanel.h" />
+    <ClInclude Include="DisarmState.h" />
     <ClInclude Include="Door.h" />
     <ClInclude Include="DoorOpenAlarm.h" />
     <ClInclude Include="FierAlarm.h" />
@@ -189,6 +195,7 @@
     <ClInclude Include="SensorFactory.h" />
     <ClInclude Include="Siren.h" />
     <ClInclude Include="Smoke.h" />
+    <ClInclude Include="StayArmedState.h" />
     <ClInclude Include="WindowBroken.h" />
     <ClInclude Include="WindowBrokenAlarm.h" />
   </ItemGroup>

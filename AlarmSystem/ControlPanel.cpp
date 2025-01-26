@@ -7,7 +7,7 @@
 #include "../DataHelper/ObjectType.h"
 #include "../Communication/RFCommunication.h"
 
-ControlPanel::ControlPanel(): m_controlPanelMacAddress(0)
+ControlPanel::ControlPanel(): m_controlPanelMacAddress(0), m_currentSystemState(std::make_unique<DisarmState>())
 {
 
 	std::vector<SensorData> sensorDataFromFile;
@@ -209,4 +209,14 @@ void ControlPanel::CheckForActiveAlarms()
 	}
 
 	UpdateGUIWithActiveAlarms();
+}
+
+void ControlPanel::SetState(std::unique_ptr<AlarmSystemState> _newstate)
+{
+	m_currentSystemState = std::move(_newstate);
+}
+
+void ControlPanel::HandleState() const
+{
+	m_currentSystemState->Handle();
 }

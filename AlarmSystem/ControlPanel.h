@@ -8,6 +8,8 @@
 #include "Logger.h"
 #include "GUI.h"
 #include "KeyPad.h"
+#include "AlarmSystemState.h"
+#include "DisarmState.h"
 
 
 class ControlPanel {
@@ -22,6 +24,8 @@ public:
 	void Start();
 	void SendMessage(MessagePacket& packet, std::shared_ptr<IDevice> device);
 	void ReceiveMessage(std::shared_ptr<IDevice> sensor);
+	void SetState(std::unique_ptr<AlarmSystemState> _newstate);
+	void HandleState() const;
 
 private:
 	int m_controlPanelMacAddress;
@@ -30,6 +34,7 @@ private:
 	std::vector<std::shared_ptr<IObserver>> m_activeAlarmCollection;
 	std::atomic<bool> stop;
 	std::shared_ptr<GUI> m_gui;
+	std::unique_ptr<AlarmSystemState> m_currentSystemState;
 
 	void RegisterSensorToControlPanel(SensorData sensordata);
 	void RegisterDeviceToControlPanel(SensorData sensordata);
