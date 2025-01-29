@@ -7,6 +7,5 @@ class IDevice {
 public:
 	virtual SensorData GetSensorData() const = 0;
 	virtual void SetSensorData(SensorData data) = 0;
-	virtual const std::vector<std::shared_ptr<IObserver>> GetData() { return {}; }
 	virtual ~IDevice() = default;
 };

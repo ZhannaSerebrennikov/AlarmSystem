@@ -26,6 +26,7 @@ public:
 	void ReceiveMessage(std::shared_ptr<IDevice> sensor);
 	void SetState(std::unique_ptr<AlarmSystemState> _newstate);
 	void HandleState() const;
+	void UpdateGUI();
 
 private:
 	int m_controlPanelMacAddress;
@@ -44,4 +45,5 @@ private:
 	void CheckForActiveAlarms();
 	void UpdateGUIWithActiveAlarms();
 	void ResetActiveAlarmCollection();
+	void UpdateGUIWithSystemState();
 };

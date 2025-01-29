@@ -20,9 +20,19 @@ void GUI::RemoveActiveAlarm(std::string alarmToRemove)
 	//TODO
 }
 
-const std::vector<std::shared_ptr<IObserver>> GUI::GetData()
+void GUI::SetSystemState(AlarmSystemState& _systemState)
 {
-	return GetActiveAlarms();
+	m_systemState = &_systemState;
+}
+
+const GUIData GUI::GetData()
+{
+	GUIData guiData;
+
+	guiData.activeAlarms = GetActiveAlarms();
+	guiData.systemState = m_systemState;
+
+	return guiData;
 }
 
 SensorData GUI::GetSensorData() const

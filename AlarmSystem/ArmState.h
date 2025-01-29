@@ -4,4 +4,5 @@
 class ArmState : public AlarmSystemState {
 public:
 	void Handle() override;
+	void DisplaySystemState() override;
 };

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <memory>
 #include "ControlPanel.h"
 #include "SensorFactory.h"
 #include "../DataHelper/TXTDataReader.h"
@@ -105,7 +106,9 @@ void ControlPanel::Monitoring()
 		}
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 	}
-	CheckForActiveAlarms();
+
+	UpdateGUI();
+
 	for (auto it = m_deviceCollection.begin(); it != m_deviceCollection.end(); ++it)
 	{
 		if (std::dynamic_pointer_cast<GUI>(*it))
@@ -143,7 +146,14 @@ void ControlPanel::SendMessage(MessagePacket& packet, std::shared_ptr<IDevice> d
 	}
 	else
 	{
-		packet.CreatePacket(device->GetData(), device->GetSensorData(), device->GetSensorData().macAddress); // Just an example, you should define packet structure for devices
+		if (std::shared_ptr<GUI> guiDevice = std::dynamic_pointer_cast<GUI>(device))
+		{
+			packet.CreatePacket(guiDevice->GetData(), guiDevice->GetSensorData(), guiDevice->GetSensorData().macAddress);
+		}
+		else{
+			packet.CreatePacket(device->GetSensorData(), device->GetSensorData().macAddress); // Just an example, you should define packet structure for devices
+		}
+		
 		RFCommunication::SendPacket(packet);
 
 		std::string message = "Control Panel Send Message to device " + std::to_string(device->GetSensorData().macAddress) + ".";
@@ -161,6 +171,13 @@ void ControlPanel::ReceiveMessage(std::shared_ptr<IDevice> sensor)
 	Logger::GetInstance().Log(message);
 }
 
+void ControlPanel::UpdateGUI()
+{
+	CheckForActiveAlarms();
+	UpdateGUIWithActiveAlarms();
+	UpdateGUIWithSystemState();
+}
+
 void ControlPanel::UpdateGUIWithActiveAlarms()
 {
 	if(m_gui)
@@ -168,6 +185,17 @@ void ControlPanel::UpdateGUIWithActiveAlarms()
 		m_gui->SetActiveAlarms(m_activeAlarmCollection);
 	}
 }
+
+void ControlPanel::UpdateGUIWithSystemState()
+{
+	if (m_gui)
+	{
+		m_gui->SetSystemState(*m_currentSystemState);
+	}
+}
+
+
+
 
 void ControlPanel::ResetActiveAlarmCollection()
 {
@@ -207,8 +235,6 @@ void ControlPanel::CheckForActiveAlarms()
 			}
 		}
 	}
-
-	UpdateGUIWithActiveAlarms();
 }
 
 void ControlPanel::SetState(std::unique_ptr<AlarmSystemState> _newstate)

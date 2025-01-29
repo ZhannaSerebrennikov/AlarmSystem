@@ -8,7 +8,6 @@
 #include "../HardwareSensorSimulation/HardwareSensorsFactory.h"
 #include "../DataHelper/TXTDataReader.h"
 
-
 class AlarmSystem {
 public:
 	AlarmSystem();
