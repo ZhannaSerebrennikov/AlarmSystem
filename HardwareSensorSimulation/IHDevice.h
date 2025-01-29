@@ -1,6 +1,7 @@
 #pragma once
 #include <mutex>
 #include "../DataHelper/MessageQueue.h"
+#include "../DataHelper/MessagePacket.h"
 #include "../DataHelper/ObjectType.h"
 #include "../AlarmSystem/Logger.h"
 #include "../Communication/RFCommunication.h"

@@ -11,6 +11,7 @@ public:
 	void SendPacket(SensorData& m_sensorData) override;
 	void ListenToControlPanel() override;
 	void ShowMenu();
+	void ShowSystemStateMenu();
 
 private:
 	SensorData m_sensorData;

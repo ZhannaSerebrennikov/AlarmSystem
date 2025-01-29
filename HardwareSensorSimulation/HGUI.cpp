@@ -55,6 +55,17 @@ void HGUI::ListenToControlPanel()
 					(*it)->DisplayAlarm();  // Assuming IObserver has a method DisplayAlarm
 				}
 			}
+			if (msg.GetSensorData().inputOutput == 1)
+			{
+				AlarmSystemState* currentSystemState = msg.GetGuiData().systemState;
+				std::cout << "Current System State is ---> ";
+				(*currentSystemState).DisplaySystemState();
+				std::cout << "." << std::endl;
+			}
+			if (msg.GetSensorData().inputOutput == 2)
+			{
+				ShowSystemStateMenu();
+			}
 			std::cout << "Sensor " << msg.GetDstMacAddress() << " RECEIVED data from Control Panel" << std::endl;
 			std::cout << "A " << msg.GetDstMacAddress() << " RECEIVED data from Control Panel" << std::endl;
 			SendPacket(m_sensorData);
@@ -63,7 +74,13 @@ void HGUI::ListenToControlPanel()
 }
 void HGUI::ShowMenu()
 {
-	std::cout << "\n 1. Trigger Sensor\n 2. Remove Alarm\n 3. Display All Alarms\n 4. Display Conected Sensors\n 5.  Exit" << std::endl;
+	std::cout << "\n 1. Display Current System State\n 2. Change Syystem State\n 3. Trigger Sensor\n 4. Remove Alarm\n 5. Display All Alarms\n 6. Display Conected Sensors\n 7. Exit\n" << std::endl;
+}
+
+void HGUI::ShowSystemStateMenu()
+{
+	std::cout << "Change System State to:" << std::endl;
+	std::cout << "\n 1. Arm\n 2. DisArm\n 3. Stay Armed\n" << std::endl;
 }
 
 /*void HDoor::ListenToControlPanel() {
