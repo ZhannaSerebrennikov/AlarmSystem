@@ -29,4 +29,5 @@ public:
 	const GUIData GetData();
 	void SetStatus(const SensorStatusEnum& newStatus);
 	void SetUserInput(int _userInput);
+	//int GetUserInput();
 };

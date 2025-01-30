@@ -26,6 +26,11 @@ ControlPanel::ControlPanel(): m_controlPanelMacAddress(0), m_currentSystemState(
 		{
 			m_gui = guiPtr;
 		}
+		else
+		{
+			std::shared_ptr<KeyPad> keypadPtr = std::dynamic_pointer_cast<KeyPad>(*it);
+			m_keyPad = keypadPtr;
+		}
 	}
 	//RegisterAllDevicesToControlPanel(sensorDataFromFile);
 	//m_deviceCollection.push_back(std::make_shared<GUI>());
@@ -89,6 +94,10 @@ void ControlPanel::Start()
 	while (true)
 	{
 		Monitoring();
+		if (m_keyPad->GetUserInput() == 2)
+		{
+			ChangeSystemState();
+		}
 	}
 }
 
@@ -245,4 +254,14 @@ void ControlPanel::SetState(std::unique_ptr<AlarmSystemState> _newstate)
 void ControlPanel::HandleState() const
 {
 	m_currentSystemState->Handle();
+}
+
+void ControlPanel::ChangeSystemState()
+{
+	if (dynamic_cast<DisarmState*>(m_currentSystemState.get()))
+	{
+		m_currentSystemState = std::make_unique<ArmState>();
+	}
+	else
+		m_currentSystemState = std::make_unique<DisarmState>();
 }

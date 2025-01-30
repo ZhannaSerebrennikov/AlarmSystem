@@ -59,3 +59,8 @@ void GUI::SetUserInput(int _userInput)
 {
 	m_sensorData.inputOutput = _userInput;
 }
+
+/*int GUI::GetUserInput()
+{
+	return m_sensorData.inputOutput;
+}*/

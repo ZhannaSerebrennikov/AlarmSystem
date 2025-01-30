@@ -10,6 +10,7 @@
 #include "KeyPad.h"
 #include "AlarmSystemState.h"
 #include "DisarmState.h"
+#include "ArmState.h"
 
 
 class ControlPanel {
@@ -35,6 +36,7 @@ private:
 	std::vector<std::shared_ptr<IObserver>> m_activeAlarmCollection;
 	std::atomic<bool> stop;
 	std::shared_ptr<GUI> m_gui;
+	std::shared_ptr<KeyPad> m_keyPad;
 	std::unique_ptr<AlarmSystemState> m_currentSystemState;
 
 	void RegisterSensorToControlPanel(SensorData sensordata);
@@ -46,4 +48,5 @@ private:
 	void UpdateGUIWithActiveAlarms();
 	void ResetActiveAlarmCollection();
 	void UpdateGUIWithSystemState();
+	void ChangeSystemState();
 };

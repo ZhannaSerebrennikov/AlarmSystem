@@ -43,6 +43,9 @@
     <Filter Include="Devices\HKeyPad">
       <UniqueIdentifier>{d8a4d874-89d3-4a73-8020-3782e99a6a2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Devices\Source Files">
+      <UniqueIdentifier>{613481d7-7387-48d8-bb18-8f06e9529f35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="HardwareSensorsFactory.cpp">

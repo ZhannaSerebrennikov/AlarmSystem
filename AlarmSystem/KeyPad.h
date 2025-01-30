@@ -5,6 +5,7 @@ class KeyPad : public IDevice
 {
 private:
 	SensorData m_sensorData;
+
 public:
 	KeyPad(SensorData _sensorData);
 	SensorData GetSensorData() const;
