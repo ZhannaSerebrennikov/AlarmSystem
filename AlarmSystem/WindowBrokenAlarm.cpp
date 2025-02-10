@@ -14,7 +14,7 @@ WindowBrokenAlarm::~WindowBrokenAlarm()
 
 void WindowBrokenAlarm::Update(SensorStatusEnum status)
 {
-	SetAlarmStatus(status);
+	UpdateAlarmStatus(status);
 
 	if (status == SensorStatusEnum::ALARM)
 	{
@@ -25,7 +25,7 @@ void WindowBrokenAlarm::Update(SensorStatusEnum status)
 	}
 }
 
-void WindowBrokenAlarm::SetAlarmStatus(SensorStatusEnum status)
+void WindowBrokenAlarm::UpdateAlarmStatus(SensorStatusEnum status)
 {
 	m_alarmstatus = status;
 }

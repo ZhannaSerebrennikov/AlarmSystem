@@ -35,7 +35,7 @@ void BulglarAlarm::Update(SensorStatusEnum status)
 	CheckAlarmConditions();
 	if (m_isActive)
 	{
-		SetAlarmStatus(SensorStatusEnum::ALARM);
+		UpdateAlarmStatus(SensorStatusEnum::ALARM);
 	}
 	/// <summary>
 	/*if (m_motionSensor->GetStatus() == SensorStatusEnum::ALARM && m_doorSensor->GetStatus() == SensorStatusEnum::ALARM)
@@ -76,7 +76,7 @@ void BulglarAlarm::CheckAlarmConditions()
 	m_isActive = m_motionDetected && m_doorOpenDetected;
 }
 
-void BulglarAlarm::SetAlarmStatus(SensorStatusEnum status)
+void BulglarAlarm::UpdateAlarmStatus(SensorStatusEnum status)
 {
 	alarmStatus = status;
 }

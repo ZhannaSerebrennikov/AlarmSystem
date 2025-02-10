@@ -14,7 +14,7 @@ MotionAlarm::~MotionAlarm()
 
 void MotionAlarm::Update(SensorStatusEnum status)
 {
-	SetAlarmStatus(status);
+	UpdateAlarmStatus(status);
 
 	if (status == SensorStatusEnum::ALARM)
 	{
@@ -25,7 +25,7 @@ void MotionAlarm::Update(SensorStatusEnum status)
 	}
 }
 
-void MotionAlarm::SetAlarmStatus(SensorStatusEnum status)
+void MotionAlarm::UpdateAlarmStatus(SensorStatusEnum status)
 {
 	m_alarmstatus = status;
 }

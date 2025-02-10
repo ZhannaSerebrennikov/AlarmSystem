@@ -13,7 +13,7 @@ public:
 	~BulglarAlarm();
 	void Update(SensorStatusEnum status);
 	bool IsActive() const;
-	void SetAlarmStatus(SensorStatusEnum status);
+	void UpdateAlarmStatus(SensorStatusEnum status);
 	void DisplayAlarm() const override;
 
 

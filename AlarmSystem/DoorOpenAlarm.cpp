@@ -15,7 +15,7 @@ DoorOpenAlarm::~DoorOpenAlarm()
 
 void DoorOpenAlarm::Update(SensorStatusEnum status)//OnNotify
 {
-	SetAlarmStatus(status);
+	UpdateAlarmStatus(status);
 
 	if (status == SensorStatusEnum::ALARM)
 	{
@@ -27,7 +27,7 @@ void DoorOpenAlarm::Update(SensorStatusEnum status)//OnNotify
 	}
 }
 
-void DoorOpenAlarm::SetAlarmStatus(SensorStatusEnum status)
+void DoorOpenAlarm::UpdateAlarmStatus(SensorStatusEnum status)
 {
 	alarmStatus = status;
 }

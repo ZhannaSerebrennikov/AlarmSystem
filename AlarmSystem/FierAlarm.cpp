@@ -14,7 +14,7 @@ FierAlarm::~FierAlarm()
 
 void FierAlarm::Update(SensorStatusEnum status)
 {
-	SetAlarmStatus(status);
+	UpdateAlarmStatus(status);
 
 	if (status == SensorStatusEnum::ALARM)
 	{
@@ -25,7 +25,7 @@ void FierAlarm::Update(SensorStatusEnum status)
 	}
 }
 
-void FierAlarm::SetAlarmStatus(SensorStatusEnum status)
+void FierAlarm::UpdateAlarmStatus(SensorStatusEnum status)
 {
 	m_alarmstatus = status;
 }
