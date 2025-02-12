@@ -85,6 +85,9 @@
     <Filter Include="AlarmSystemState\StayArmedState">
       <UniqueIdentifier>{5a321c2f-fa4f-48ab-a986-f574baaa4525}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Alarm\AlarmStatus">
+      <UniqueIdentifier>{420e5326-6074-40f2-9a73-5a41bd152a6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\main.cpp">
@@ -146,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="StayArmedState.cpp">
       <Filter>AlarmSystemState\StayArmedState</Filter>
+    </ClCompile>
+    <ClCompile Include="AlarmStatus.cpp">
+      <Filter>Alarm\AlarmStatus</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -231,6 +237,9 @@
     </ClInclude>
     <ClInclude Include="StayArmedState.h">
       <Filter>AlarmSystemState\StayArmedState</Filter>
+    </ClInclude>
+    <ClInclude Include="AlarmStatus.h">
+      <Filter>Alarm\AlarmStatus</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@ std::vector<Motion*> BulglarAlarm::m_motionSensor;
 std::vector<Door*> BulglarAlarm::m_doorSensor;
 bool BulglarAlarm::m_isActive = false;
 
-BulglarAlarm::BulglarAlarm(ISensor* sensor) : m_motionDetected(false), m_doorOpenDetected(false)
+BulglarAlarm::BulglarAlarm(ISensor* sensor) : m_motionDetected(false), m_doorOpenDetected(false), m_alarmStatus(new AlarmStatus())
 {
 	if (auto doorSensor = dynamic_cast<Door*>(sensor))
 	{
@@ -28,6 +28,8 @@ BulglarAlarm::~BulglarAlarm()
 	for (auto& motion : m_motionSensor) {
 		motion->RemoveObserver(sharedPtr);
 	}
+
+	delete m_alarmStatus;
 }
 
 void BulglarAlarm::Update(SensorStatusEnum status)
@@ -35,7 +37,7 @@ void BulglarAlarm::Update(SensorStatusEnum status)
 	CheckAlarmConditions();
 	if (m_isActive)
 	{
-		UpdateAlarmStatus(SensorStatusEnum::ALARM);
+		m_alarmStatus->SetAlarmStatus(status);
 	}
 	/// <summary>
 	/*if (m_motionSensor->GetStatus() == SensorStatusEnum::ALARM && m_doorSensor->GetStatus() == SensorStatusEnum::ALARM)
@@ -76,14 +78,10 @@ void BulglarAlarm::CheckAlarmConditions()
 	m_isActive = m_motionDetected && m_doorOpenDetected;
 }
 
-void BulglarAlarm::UpdateAlarmStatus(SensorStatusEnum status)
-{
-	alarmStatus = status;
-}
 
 bool BulglarAlarm::IsActive() const
 {
-	return m_isActive;
+	return m_alarmStatus->IsActive();
 }
 
 void BulglarAlarm::DisplayAlarm() const

@@ -1,6 +1,6 @@
 #include "MotionAlarm.h"
 
-MotionAlarm::MotionAlarm(ISensor* sensor) : m_sensor(sensor)
+MotionAlarm::MotionAlarm(ISensor* sensor) : m_sensor(sensor), m_alarmStatus(new AlarmStatus())
 {
 	//std::shared_ptr<FierAlarm> sharedPtr(this);
 	//m_sensor->AddObserver(std::shared_ptr<FierAlarm>(this));
@@ -10,11 +10,13 @@ MotionAlarm::~MotionAlarm()
 {
 	std::shared_ptr<MotionAlarm> sharedPtr(this);
 	m_sensor->RemoveObserver(sharedPtr);
+
+	delete m_alarmStatus;
 }
 
 void MotionAlarm::Update(SensorStatusEnum status)
 {
-	UpdateAlarmStatus(status);
+	m_alarmStatus->SetAlarmStatus(status);
 
 	if (status == SensorStatusEnum::ALARM)
 	{
@@ -25,12 +27,12 @@ void MotionAlarm::Update(SensorStatusEnum status)
 	}
 }
 
-void MotionAlarm::UpdateAlarmStatus(SensorStatusEnum status)
-{
-	m_alarmstatus = status;
-}
-
 bool MotionAlarm::IsActive() const
 {
-	return m_alarmstatus == SensorStatusEnum::ALARM;
+	return m_alarmStatus->IsActive();
+}
+
+void MotionAlarm::DisplayAlarm() const
+{
+	std::cout << "Motion Alarm triggered! Sensor MacAdress " << m_sensor->GetSensorData().macAddress << std::endl;
 }

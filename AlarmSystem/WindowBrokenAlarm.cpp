@@ -1,6 +1,6 @@
 #include "WindowBrokenAlarm.h"
 
-WindowBrokenAlarm::WindowBrokenAlarm(ISensor* sensor) : m_sensor(sensor)
+WindowBrokenAlarm::WindowBrokenAlarm(ISensor* sensor) : m_sensor(sensor), m_alarmStatus(new AlarmStatus())
 {
 	//std::shared_ptr<WindowBrokenAlarm> sharedPtr(this);
 	//m_sensor->AddObserver(std::shared_ptr<WindowBrokenAlarm>(this));
@@ -10,11 +10,13 @@ WindowBrokenAlarm::~WindowBrokenAlarm()
 {
 	std::shared_ptr<WindowBrokenAlarm> sharedPtr(this);
 	m_sensor->RemoveObserver(sharedPtr);
+
+	delete m_alarmStatus;
 }
 
 void WindowBrokenAlarm::Update(SensorStatusEnum status)
 {
-	UpdateAlarmStatus(status);
+	m_alarmStatus->SetAlarmStatus(status);
 
 	if (status == SensorStatusEnum::ALARM)
 	{
@@ -25,12 +27,12 @@ void WindowBrokenAlarm::Update(SensorStatusEnum status)
 	}
 }
 
-void WindowBrokenAlarm::UpdateAlarmStatus(SensorStatusEnum status)
-{
-	m_alarmstatus = status;
-}
-
 bool WindowBrokenAlarm::IsActive() const
 {
-	return m_alarmstatus == SensorStatusEnum::ALARM;
+	return m_alarmStatus->IsActive();
+}
+
+void WindowBrokenAlarm::DisplayAlarm() const
+{
+	std::cout << "Windows Broken Alarm triggered! Sensor MacAdress " << m_sensor->GetSensorData().macAddress << std::endl;
 }

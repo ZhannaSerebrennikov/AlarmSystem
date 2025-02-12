@@ -3,19 +3,17 @@
 #include "IObserver.h"
 #include "../DataHelper/ObjectType.h"
 #include "ISensor.h"
+#include "AlarmStatus.h"
 
 class MotionAlarm : public IObserver {
 public:
 	explicit MotionAlarm(ISensor* sensor);
 	~MotionAlarm();
-	void Update(SensorStatusEnum status);
+	void Update(SensorStatusEnum status) override;
 	bool IsActive() const override;
-	void UpdateAlarmStatus(SensorStatusEnum status);
-	void DisplayAlarm() const override {
-		std::cout << "Motion Alarm triggered! Sensor MacAdress " << m_sensor->GetSensorData().macAddress << std::endl;
-	}
+	void DisplayAlarm() const override;
 
 private:
 	ISensor* m_sensor;
-	SensorStatusEnum m_alarmstatus;
+	AlarmStatus* m_alarmStatus;
 };

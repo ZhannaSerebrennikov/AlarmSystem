@@ -2,20 +2,19 @@
 #include "IObserver.h"
 #include "../DataHelper/ObjectType.h"
 #include "ISensor.h"
+#include "AlarmStatus.h"
 
 class DoorOpenAlarm : public IObserver {
 public:
 	explicit DoorOpenAlarm(ISensor* sensor);
 	~DoorOpenAlarm();
 
-	void Update(SensorStatusEnum status);//OnNotify
+	void Update(SensorStatusEnum status) override;//OnNotify
 	bool IsActive() const override;
-	void UpdateAlarmStatus(SensorStatusEnum status);
-	void DisplayAlarm() const override {
-		std::cout << "Door Open Alarm triggered! Sensor MacAdress " << m_sensor->GetSensorData().macAddress << std::endl;
-	}
+	void DisplayAlarm() const override;
 
 private:
-	SensorStatusEnum alarmStatus;
+	//SensorStatusEnum m_alarmStatus;
+	AlarmStatus* m_alarmStatus;
 	ISensor* m_sensor;
 };
