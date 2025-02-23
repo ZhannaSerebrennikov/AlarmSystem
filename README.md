@@ -1,5 +1,5 @@
 ## Alarm System Project
-This is a proect of Standart Events System that includes Control Panel, sensors and devices wich communicate via RF.
+This is a project of Standart Events System that includes Control Panel, sensors and devices wich communicate via RF simulation.
 ## Multithreading:
   The ControlPanel::monitor method Start in a separate thread to continuously check if any sensor is triggered.
   Each Sensor or Device has it own thread to simulate the triggering of sensors.
