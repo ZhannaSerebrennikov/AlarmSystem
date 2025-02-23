@@ -3,8 +3,6 @@
 
 DoorOpenAlarm::DoorOpenAlarm(ISensor* sensor): m_sensor(sensor), m_alarmStatus(new AlarmStatus())
 {
-	//std::shared_ptr<DoorOpenAlarm> sharedPtr(this);
-	//m_sensor->AddObserver(std::shared_ptr<DoorOpenAlarm>(this));
 }
 
 DoorOpenAlarm::~DoorOpenAlarm()

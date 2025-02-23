@@ -11,6 +11,8 @@
 class BulglarAlarm : public IObserver {
 public:
 	explicit BulglarAlarm(ISensor* sensor);
+	BulglarAlarm(const BulglarAlarm& other);
+	BulglarAlarm& operator=(const BulglarAlarm& other);
 	~BulglarAlarm();
 	void Update(SensorStatusEnum status) override;
 	bool IsActive() const override;

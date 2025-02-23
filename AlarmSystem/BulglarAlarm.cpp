@@ -32,6 +32,30 @@ BulglarAlarm::~BulglarAlarm()
 	delete m_alarmStatus;
 }
 
+BulglarAlarm::BulglarAlarm(const BulglarAlarm& other) : m_alarmStatus(other.m_alarmStatus),m_motionDetected(other.m_motionDetected), m_doorOpenDetected(other.m_doorOpenDetected)
+{
+	m_motionSensor = other.m_motionSensor;
+	m_doorSensor = other.m_doorSensor;
+	m_isActive = other.m_isActive;
+}
+
+BulglarAlarm& BulglarAlarm::operator=(const BulglarAlarm& other)
+{
+	if (this != &other)
+	{
+		if (m_alarmStatus)
+			delete m_alarmStatus;
+
+		m_alarmStatus = (other.m_alarmStatus ? new AlarmStatus(*other.m_alarmStatus) : nullptr);
+		m_motionDetected = other.m_motionDetected;
+		m_doorOpenDetected = other.m_doorOpenDetected;
+		m_motionSensor = other.m_motionSensor; // Handle the static member
+		m_doorSensor = other.m_doorSensor;     // Handle the static member
+		m_isActive = other.m_isActive;
+	}
+	return *this;
+}
+
 void BulglarAlarm::Update(SensorStatusEnum status)
 {
 	CheckAlarmConditions();
