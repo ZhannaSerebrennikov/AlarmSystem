@@ -5,6 +5,23 @@ DoorOpenAlarm::DoorOpenAlarm(ISensor* sensor): m_sensor(sensor), m_alarmStatus(n
 {
 }
 
+DoorOpenAlarm::DoorOpenAlarm(const DoorOpenAlarm& _other) : m_alarmStatus(new AlarmStatus(*_other.m_alarmStatus))
+{
+	m_sensor = _other.m_sensor;
+}
+
+DoorOpenAlarm& DoorOpenAlarm::operator=(const DoorOpenAlarm& _other)
+{
+	if (this != &_other)
+	{
+		if (m_alarmStatus)
+			delete m_alarmStatus;
+		m_alarmStatus = _other.m_alarmStatus;
+		m_sensor = _other.m_sensor;
+	}
+	return *this;
+}
+
 DoorOpenAlarm::~DoorOpenAlarm()
 {
 	std::shared_ptr<DoorOpenAlarm> sharedPtr(this);

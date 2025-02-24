@@ -32,7 +32,7 @@ BulglarAlarm::~BulglarAlarm()
 	delete m_alarmStatus;
 }
 
-BulglarAlarm::BulglarAlarm(const BulglarAlarm& other) : m_alarmStatus(other.m_alarmStatus),m_motionDetected(other.m_motionDetected), m_doorOpenDetected(other.m_doorOpenDetected)
+BulglarAlarm::BulglarAlarm(const BulglarAlarm& other) : m_alarmStatus(new AlarmStatus(*other.m_alarmStatus)),m_motionDetected(other.m_motionDetected), m_doorOpenDetected(other.m_doorOpenDetected)
 {
 	m_motionSensor = other.m_motionSensor;
 	m_doorSensor = other.m_doorSensor;

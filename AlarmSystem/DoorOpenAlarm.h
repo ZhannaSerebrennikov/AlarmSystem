@@ -7,6 +7,8 @@
 class DoorOpenAlarm : public IObserver {
 public:
 	explicit DoorOpenAlarm(ISensor* sensor);
+	DoorOpenAlarm(const DoorOpenAlarm& _other);
+	DoorOpenAlarm& operator=(const DoorOpenAlarm& _other);
 	~DoorOpenAlarm();
 
 	void Update(SensorStatusEnum status) override;//OnNotify
