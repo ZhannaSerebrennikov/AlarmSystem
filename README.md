@@ -6,4 +6,4 @@ This repository contains a project of Standart Events System designed for home s
 ## Synchronization:
   The std::mutex mtx is used in the MessageQueue class to ensure thread safety when accessing the data.
 ## Class Diagram
-![My Image](1.1.1ClassDiagram.png)
+![My Image](1.1.1.ClassDiagramm.png)
