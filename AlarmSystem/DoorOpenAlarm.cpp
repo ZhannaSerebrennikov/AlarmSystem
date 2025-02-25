@@ -16,7 +16,7 @@ DoorOpenAlarm& DoorOpenAlarm::operator=(const DoorOpenAlarm& _other)
 	{
 		if (m_alarmStatus)
 			delete m_alarmStatus;
-		m_alarmStatus = _other.m_alarmStatus;
+		m_alarmStatus = new AlarmStatus(*_other.m_alarmStatus);
 		m_sensor = _other.m_sensor;
 	}
 	return *this;

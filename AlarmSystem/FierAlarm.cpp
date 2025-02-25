@@ -6,6 +6,25 @@ FierAlarm::FierAlarm(ISensor* sensor): m_sensor(sensor), m_alarmStatus(new Alarm
 	//m_sensor->AddObserver(std::shared_ptr<FierAlarm>(this));
 }
 
+FierAlarm::FierAlarm(const FierAlarm& _other) : m_alarmStatus(new AlarmStatus(*_other.m_alarmStatus))
+{
+	this->m_sensor = m_sensor;
+}
+
+FierAlarm& FierAlarm::operator=(const FierAlarm& _other)
+{
+	if (this != &_other)
+	{
+		this->m_sensor = m_sensor;
+
+		if (this->m_alarmStatus)
+			delete this->m_alarmStatus;
+		this->m_alarmStatus = new AlarmStatus(*_other.m_alarmStatus);
+	}
+
+	return *this;
+}
+
 FierAlarm::~FierAlarm()
 {
 	std::shared_ptr<FierAlarm> sharedPtr(this);

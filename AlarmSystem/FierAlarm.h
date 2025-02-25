@@ -8,6 +8,8 @@
 class FierAlarm : public IObserver {
 public:
 	explicit FierAlarm(ISensor* sensor);
+	FierAlarm(const FierAlarm& _other);
+	FierAlarm& operator=(const FierAlarm& _other);
 	~FierAlarm();
 	void Update(SensorStatusEnum status) override;
 	bool IsActive() const override;
