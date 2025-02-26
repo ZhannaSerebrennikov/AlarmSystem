@@ -8,6 +8,8 @@
 class MotionAlarm : public IObserver {
 public:
 	explicit MotionAlarm(ISensor* sensor);
+	MotionAlarm(const MotionAlarm& _other);
+	MotionAlarm& operator=(const MotionAlarm& _other);
 	~MotionAlarm();
 	void Update(SensorStatusEnum status) override;
 	bool IsActive() const override;
