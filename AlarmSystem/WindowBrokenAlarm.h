@@ -8,6 +8,8 @@
 class WindowBrokenAlarm : public IObserver {
 public:
 	explicit WindowBrokenAlarm(ISensor* sensor);
+	WindowBrokenAlarm(const WindowBrokenAlarm& _other);
+	WindowBrokenAlarm& operator=(const WindowBrokenAlarm& _other);
 	~WindowBrokenAlarm();
 	void Update(SensorStatusEnum status) override;
 	bool IsActive() const override;

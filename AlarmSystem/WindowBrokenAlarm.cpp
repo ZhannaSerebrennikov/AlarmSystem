@@ -6,6 +6,25 @@ WindowBrokenAlarm::WindowBrokenAlarm(ISensor* sensor) : m_sensor(sensor), m_alar
 	//m_sensor->AddObserver(std::shared_ptr<WindowBrokenAlarm>(this));
 }
 
+WindowBrokenAlarm::WindowBrokenAlarm(const  WindowBrokenAlarm& _other)
+{
+	this->m_sensor = _other.m_sensor;
+	this->m_alarmStatus = new AlarmStatus(*_other.m_alarmStatus);
+}
+
+WindowBrokenAlarm& WindowBrokenAlarm::operator=(const WindowBrokenAlarm& _other)
+{
+	if (this != &_other)
+	{
+		this->m_sensor = _other.m_sensor;
+
+		if (this->m_alarmStatus != nullptr)
+			delete this->m_alarmStatus;
+		this->m_alarmStatus = new AlarmStatus(*_other.m_alarmStatus);
+	}
+	return *this;
+}
+
 WindowBrokenAlarm::~WindowBrokenAlarm()
 {
 	std::shared_ptr<WindowBrokenAlarm> sharedPtr(this);

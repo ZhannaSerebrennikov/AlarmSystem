@@ -16,7 +16,7 @@ MotionAlarm& MotionAlarm::operator=(const MotionAlarm& _other)
 {
 	if (this != &_other)
 	{
-		this->m_sensor = m_sensor;
+		this->m_sensor = _other.m_sensor;
 
 		if (this->m_alarmStatus)
 			delete this->m_alarmStatus;
